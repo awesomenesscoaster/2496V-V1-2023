@@ -50,6 +50,10 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {}
+	controller.clear();
+	while(true){
+		
+	}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
