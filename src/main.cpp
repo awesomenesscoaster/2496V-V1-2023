@@ -1,7 +1,6 @@
 #include "main.h"
 #include "robot.h"
-#include "autons.h"
-
+// #include "autons.h"
 
 
 /**
@@ -49,11 +48,12 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
+ 
 void competition_initialize() {}
-	controller.clear();
-	while(true){
+// 	controller.clear();
+// 	while(true){
 		
-	}
+// 	}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -84,6 +84,9 @@ void autonomous() {}
 void opcontrol() {
 	leftCata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	rightCata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+	topLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
 
 
 	while (true) {
