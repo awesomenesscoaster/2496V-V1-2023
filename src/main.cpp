@@ -84,16 +84,62 @@ void autonomous() {}
 void opcontrol() {
 	leftCata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	rightCata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-
-	topLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-
-
+	catapult.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
 	while (true) {
 		
-		if (controller.get_digital_new_press(DIGITAL_L1)) {
-			leftCata.move(127);
-			rightCata.move(127);
+		// Catapult
+		// if (cataSwitch.get_value() != 0){
+		// 	catapult.move(127);
+		// }
+		// else if (controller.get_digital_new_press(DIGITAL_R1)){
+		// 	catapult.move(-127);
+		// }
+
+		if (controller.get_digital(DIGITAL_R1)){
+			catapult.move(127);
+		}
+		else if (controller.get_digital(DIGITAL_R2)){
+			catapult.move(-127);
+		}
+		else{
+			catapult.move(0);
+		}
+
+		// Intake
+		if (controller.get_digital(DIGITAL_L1)) {
+			intake.move(127);
+		}
+		else if (controller.get_digital(DIGITAL_L2)) {
+			intake.move(-127);
+		}
+		else{
+			intake.move(0);
+		}
+
+		float lPwr, rPwr;
+		float lYaxis, rYaxis;
+
+		//Assuming Tank Mode -- Can always change
+		rYaxis = controller.get_analog(ANALOG_RIGHT_Y);
+		lYaxis = controller.get_analog(ANALOG_LEFT_Y);
+		
+		int chasGraph = 0;
+
+		if (controller.get_digital(DIGITAL_B)){
+			chasGraph += 1;
+		}
+		
+		//Default
+		if (chasGraph == 0){
+			rPwr = rYaxis;
+			lPwr = lYaxis;
+		}
+
+		//Exponential
+		if (chasGraph == 1){
+			// rPwr = 128(cos)
 		}
 	}
 }
