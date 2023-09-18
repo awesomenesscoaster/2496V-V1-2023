@@ -24,4 +24,7 @@ extern pros::Motor_Group rightChassis;
 
 extern pros::Imu imu;
 
+void chas_move(float left_power, float right_power);
+int sgn(double input);
+
 #endif

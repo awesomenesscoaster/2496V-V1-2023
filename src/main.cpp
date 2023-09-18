@@ -1,5 +1,12 @@
 #include "main.h"
 #include "robot.h"
+#include <valarray>
+#include <cmath>
+#include <fstream>
+#include <iostream>
+
+#define _USE_MATH_DEFINE
+
 // #include "autons.h"
 
 
@@ -89,23 +96,23 @@ void opcontrol() {
 
 	while (true) {
 		
-		// Catapult
-		// if (cataSwitch.get_value() != 0){
-		// 	catapult.move(127);
-		// }
-		// else if (controller.get_digital_new_press(DIGITAL_R1)){
-		// 	catapult.move(-127);
-		// }
-
-		if (controller.get_digital(DIGITAL_R1)){
-			catapult.move(127);
-		}
-		else if (controller.get_digital(DIGITAL_R2)){
+		//Catapult
+		if (cataSwitch.get_value() != 0){
 			catapult.move(-127);
 		}
-		else{
-			catapult.move(0);
+		else if (controller.get_digital_new_press(DIGITAL_R1)){
+			catapult.move(-127);
 		}
+
+		// if (controller.get_digital(DIGITAL_R1)){
+		// 	catapult.move(127);
+		// }
+		// else if (controller.get_digital(DIGITAL_R2)){
+		// 	catapult.move(-127);
+		// }
+		// else{
+		// 	catapult.move(0);
+		// }
 
 		// Intake
 		if (controller.get_digital(DIGITAL_L1)) {
@@ -118,12 +125,12 @@ void opcontrol() {
 			intake.move(0);
 		}
 
-		float lPwr, rPwr;
-		float lYaxis, rYaxis;
+		float fPwr, tPwr;
+		float lAxis, rAxis;
 
-		//Assuming Tank Mode -- Can always change
-		rYaxis = controller.get_analog(ANALOG_RIGHT_Y);
-		lYaxis = controller.get_analog(ANALOG_LEFT_Y);
+		//Assuming Arcade Mode -- Can always change
+		lAxis = controller.get_analog(ANALOG_LEFT_Y);
+		rAxis = controller.get_analog(ANALOG_RIGHT_X);
 		
 		int chasGraph = 0;
 
@@ -133,13 +140,31 @@ void opcontrol() {
 		
 		//Default
 		if (chasGraph == 0){
-			rPwr = rYaxis;
-			lPwr = lYaxis;
+			controller.clear();
+			controller.print(0,0,"Default Graph");
+
+			fPwr = (std::abs(lAxis) > 2) ? lAxis : 0;
+			tPwr = (std::abs(rAxis) > 2) ? rAxis : 0;
 		}
 
 		//Exponential
-		if (chasGraph == 1){
-			// rPwr = 128(cos)
+		else if (chasGraph == 1){
+			controller.clear();
+			controller.print(0,0,"Exponential Graph");
+
+			fPwr = (std::abs(lAxis) > 2) ? (sgn(lAxis) * (1.2*pow(1.03566426, sgn(lAxis)*lAxis) - 1.2 + sgn(lAxis)*0.2*lAxis)) : 0;
+			tPwr = (std::abs(rAxis) > 2) ? (sgn(rAxis) * (1.2*pow(1.03566426, sgn(rAxis)*rAxis) - 1.2 + sgn(rAxis)*0.2*rAxis)) : 0;
 		}
+
+		// Cosine
+		else if (chasGraph == 2){
+			controller.clear();
+			controller.print(0,0,"Cosine Graph");
+
+			fPwr = (std::abs(lAxis) > 2) ? (sgn(lAxis)) * (-127 * cos((2*M_PI*lAxis)/508) + 127) : 0;
+			tPwr = (std::abs(rAxis) > 2) ? (sgn(rAxis)) * (-127 * cos((2*M_PI*rAxis)/508) + 127) : 0;
+		}
+
+		chas_move(fPwr-tPwr, fPwr+tPwr);
 	}
 }
