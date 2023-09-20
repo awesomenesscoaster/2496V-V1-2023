@@ -22,3 +22,6 @@ pros::Motor_Group rightChasasis ( {topRight, botRight} );
 
 pros::ADIDigitalIn cataSwitch(1);
 
+//wing piston testing
+pros::ADIDigitalOut leftWing(1, HIGH);
+pros::ADIDigitalOut rightWing(2, HIGH);

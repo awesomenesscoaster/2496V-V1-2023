@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/adi.hpp"
 
 #ifndef ROBOT_H_
 #define ROBOT_H_
@@ -21,6 +22,9 @@ extern pros::Motor intake;
 extern pros::Motor_Group catapult;
 extern pros::Motor_Group leftChassis;
 extern pros::Motor_Group rightChassis;
+
+extern pros::ADIDigitalOut leftWing;
+extern pros::ADIDigitalOut rightWing;
 
 extern pros::Imu imu;
 

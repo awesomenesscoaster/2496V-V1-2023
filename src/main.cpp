@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/misc.h"
 #include "robot.h"
 #include <valarray>
 #include <cmath>
@@ -93,9 +94,17 @@ void opcontrol() {
 	rightCata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	catapult.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
 	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	bool wings = HIGH;
 
 	while (true) {
 		
+		//Wings
+		if(controller.get_digital_new_press(DIGITAL_DOWN)){
+			leftWing.set_value(!wings);
+			rightWing.set_value(!wings);
+			wings = !wings;
+		}
+
 		//Catapult
 		if (cataSwitch.get_value() != 0){
 			catapult.move(-127);
@@ -138,6 +147,7 @@ void opcontrol() {
 			chasGraph += 1;
 		}
 		
+		/*
 		//Default
 		if (chasGraph == 0){
 			controller.clear();
@@ -166,5 +176,7 @@ void opcontrol() {
 		}
 
 		chas_move(fPwr-tPwr, fPwr+tPwr);
+		*/
 	}
+	
 }
