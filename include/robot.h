@@ -6,22 +6,21 @@
 
 extern pros::Controller controller;
 
-extern pros::Motor leftCata;
-extern pros::Motor rightCata;
+extern pros::Motor cata;
 
-extern pros::Motor topLeft;
-extern pros::Motor botLeft;
-
-extern pros::Motor topRight;
-extern pros::Motor botRight;
+extern pros::Motor lf;
+extern pros::Motor lb;
+extern pros::Motor lb;
+extern pros::Motor rf;
+extern pros::Motor rm;
+extern pros::Motor rb;
 
 extern pros::ADIDigitalIn cataSwitch;
 
 extern pros::Motor intake;
 
-extern pros::Motor_Group catapult;
-extern pros::Motor_Group leftChassis;
-extern pros::Motor_Group rightChassis;
+extern pros::Motor_Group leftdrive;
+extern pros::Motor_Group rightdrive;
 
 extern pros::ADIDigitalOut leftWing;
 extern pros::ADIDigitalOut rightWing;

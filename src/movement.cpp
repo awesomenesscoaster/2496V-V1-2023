@@ -1,11 +1,21 @@
 #include "main.h"
 #include "robot.h"
 
-void chas_move(float left_power, float right_power){
-    topLeft.move(left_power);
-    botLeft.move(left_power);
-    topRight.move(right_power);
-    botRight.move(right_power);
+void left(float power) {
+    lf.move(power);
+    lm.move(power);
+    lb.move(power);
+}
+
+void right(float power) {
+    rf.move(power);
+    rm.move(power);
+    rb.move(power);
+}
+
+void move(float left_power, float right_power){
+    left(left_power);
+    right(right_power);
 }
 
 int sgn(double input){
