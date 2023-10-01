@@ -2,6 +2,7 @@
 #include "pros/misc.h"
 #include "robot.h"
 #include "movement.cpp"
+#include "controls.cpp"
 #include <valarray>
 #include <cmath>
 #include <fstream>
@@ -91,53 +92,13 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	cata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	bool wings = HIGH;
-
 	while (true) {
-		//Tank
-		left(controller.get_analog(ANALOG_LEFT_Y));
-		right(controller.get_analog(ANALOG_RIGHT_Y));
-
-		//Catapult
-		bool half = false;
-		if (cataSwitch.get_value() !=0) {
-			cata.move(-127);				}
-		else if (controller.get_digital_new_press(DIGITAL_R1)){
-			cata.move(-127);
-		}
-		if (controller.get_digital_new_press(DIGITAL_DOWN)){
-			bool half = true;
-			cata.tare_position();
-			cata.move_absolute(100, 100);
-		}
-		while (half != false){
-			if (controller.get_digital_new_press(DIGITAL_Y)){
-				half = false;
-			}
-		}
-
-		// Intake
-		if (controller.get_digital(DIGITAL_L1)) {
-			intake.move(127);
-		}
-		else if (controller.get_digital(DIGITAL_L2)) {
-			intake.move(-127);
-		}
-		else{
-			intake.move(0);
-		}
-
-		//Wings
-		if(controller.get_digital_new_press(DIGITAL_DOWN)){
-			leftWing.set_value(!wings);
-			rightWing.set_value(!wings);
-			wings = !wings;
-		}
+		driver(1);
+		pros::delay(20);
 
 
 		//what is lil bro cooking 
+		/*
 		float fPwr, tPwr;
 
 		int chasGraph = 0;
@@ -145,9 +106,8 @@ void opcontrol() {
 		if (controller.get_digital(DIGITAL_B)){
 			chasGraph += 1;
 		}
-	
 
-		/*
+
 		//Default
 		if (chasGraph == 0){
 			controller.clear();
