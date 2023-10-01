@@ -34,14 +34,11 @@ void driver(int mode){
 	}
 
 	// Intake
-	if (controller.get_digital(DIGITAL_L1)) {
+	if (controller.get_digital_new_press(DIGITAL_L1)) {
 		intake.move(127);
 	}
-	else if (controller.get_digital(DIGITAL_L2)) {
+	else if (controller.get_digital_new_press(DIGITAL_L2)) {
 		intake.move(-127);
-	}
-	else{
-		intake.move(0);
 	}
 
 	//Wings

@@ -9,7 +9,7 @@ extern pros::Controller controller;
 extern pros::Motor cata;
 
 extern pros::Motor lf;
-extern pros::Motor lb;
+extern pros::Motor lm;
 extern pros::Motor lb;
 extern pros::Motor rf;
 extern pros::Motor rm;

@@ -23,6 +23,7 @@ pros::Motor_Group rightdrive({rf, rm, rb});
 
 pros::ADIDigitalIn cataSwitch(1);
 
+
 //wing piston testing
 pros::ADIDigitalOut leftWing(1, HIGH);
 pros::ADIDigitalOut rightWing(2, HIGH);
