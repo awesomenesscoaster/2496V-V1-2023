@@ -8,12 +8,12 @@ extern pros::Controller controller;
 
 extern pros::Motor cata;
 
-extern pros::Motor lf;
-extern pros::Motor lb;
-extern pros::Motor lb;
-extern pros::Motor rf;
-extern pros::Motor rm;
-extern pros::Motor rb;
+extern pros::Motor leftFront;
+extern pros::Motor leftMid;
+extern pros::Motor leftBack;
+extern pros::Motor rightFront;
+extern pros::Motor rightMid;
+extern pros::Motor rightBack;
 
 extern pros::ADIDigitalIn cataSwitch;
 

@@ -2,15 +2,15 @@
 #include "robot.h"
 
 void left(float power) {
-    lf.move(power);
-    lm.move(power);
-    lb.move(power);
+    leftFront.move(power);
+    leftMid.move(power);
+    leftBack.move(power);
 }
 
 void right(float power) {
-    rf.move(power);
-    rm.move(power);
-    rb.move(power);
+    rightFront.move(power);
+    rightMid.move(power);
+    rightBack.move(power);
 }
 
 void move(float left_power, float right_power){
