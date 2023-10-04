@@ -1,8 +1,10 @@
 #include "main.h"
 #include "pros/misc.h"
 #include "robot.h"
-#include "movement.cpp"
-#include "controls.cpp"
+#include "movement.h"
+#include "controls.h"
+//#include "movement.cpp"
+//#include "controls.cpp"
 #include <valarray>
 #include <cmath>
 #include <fstream>
