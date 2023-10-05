@@ -3,8 +3,6 @@
 #include "robot.h"
 #include "movement.h"
 #include "controls.h"
-//#include "movement.cpp"
-//#include "controls.cpp"
 #include <valarray>
 #include <cmath>
 #include <fstream>
