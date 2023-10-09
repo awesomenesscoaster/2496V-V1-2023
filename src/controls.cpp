@@ -1,6 +1,7 @@
 #include "main.h"
 #include "robot.h"
 #include "movement.h"
+#include "autons.h"
 
 void driver(int mode){
     bool half = false;
@@ -49,5 +50,9 @@ void driver(int mode){
 		leftWing.set_value(!wings);
 		rightWing.set_value(!wings);
 		wings = !wings;
+	}
+
+	if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)){ //PID test
+		chasPID(300);
 	}
 }
