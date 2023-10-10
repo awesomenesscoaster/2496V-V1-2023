@@ -16,7 +16,7 @@ pros::Motor rightFront(4, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 pros::Motor rightMid(5, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 pros::Motor rightBack(6, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 
-pros::Motor intake(10, MOTOR_GEARSET_6, true, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor intake(9, MOTOR_GEARSET_6, true, pros::E_MOTOR_ENCODER_DEGREES);
 
 pros::Motor_Group leftdrive({leftFront, leftMid, leftBack});
 pros::Motor_Group rightdrive({rightFront, rightMid, rightBack});
