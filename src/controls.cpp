@@ -6,7 +6,8 @@
 bool cataDown = false;
 void driver(int mode){
     bool half = false;
-    bool wings = HIGH;
+    //bool wings = HIGH;
+	bool wings;
     cata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
@@ -70,8 +71,8 @@ void driver(int mode){
 
 	//Wings
 	if(controller.get_digital_new_press(DIGITAL_DOWN)){
-		leftWing.set_value(!wings);
-		rightWing.set_value(!wings);
+		wingState.set_value(!wings);
+		//rightWing.set_value(!wings);
 		wings = !wings;
 	}
 
