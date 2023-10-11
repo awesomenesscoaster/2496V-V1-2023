@@ -31,7 +31,7 @@ void moveTo(float power, float target) {
         error = target - lf.get_position();
         float integral = integral + error;
         if (error < 1) {
-            integral = 0;
+            integral = 0;              
         } 
         else if (error > 300) {
             integral = 0;
@@ -45,8 +45,4 @@ void moveTo(float power, float target) {
             break;
         }
     }
-}
-
-int sgn(double input){
-    return input/std::abs(input);
 }
