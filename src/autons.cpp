@@ -20,7 +20,7 @@ void chasPID(double target){
     int counter;
 
     while(current < target){
-        current = leftFront.get_encoder_units();
+        current = lf.get_encoder_units();
         error = target - current;
         integral += error*(current/target);
         if (error == 10 || error > maximum){
@@ -36,9 +36,8 @@ void chasPID(double target){
             controller.print(1, 2, "Current: %f", current);
         }
 
-        leftdrive.move(voltage);
-        rightdrive.move(voltage);
-        
+        left(voltage);
+        right(voltage);
 
     }
 }

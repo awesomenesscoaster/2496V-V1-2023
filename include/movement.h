@@ -5,7 +5,7 @@ void left(float power);
 
 void right(float power);
 
-void move(float left_power, float right_power);
+void move(float power);
 
 void moveTo(float power, float target);
 
