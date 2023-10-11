@@ -19,9 +19,6 @@ extern pros::ADIDigitalIn cataSwitch;
 
 extern pros::Motor intake;
 
-extern pros::Motor_Group leftdrive;
-extern pros::Motor_Group rightdrive;
-
 extern pros::ADIDigitalOut wings;
 
 extern pros::Imu imu;

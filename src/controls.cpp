@@ -1,6 +1,7 @@
 #include "main.h"
+#include "movement.h"
+#include "pros/misc.h"
 #include "robot.h"
-#include "movement.cpp"
 
 bool half = false;
 bool wingState = false;
@@ -42,7 +43,6 @@ void driver(){
 			}
 		}
 	}
-	
 
 	// Intake
 	if (controller.get_digital_new_press(DIGITAL_L1)) {
