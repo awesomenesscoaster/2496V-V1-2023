@@ -3,6 +3,7 @@
 #include "movement.h"
 #include "autons.h"
 
+bool cataDown = false;
 void driver(int mode){
     bool half = false;
     bool wings = HIGH;
@@ -18,20 +19,42 @@ void driver(int mode){
         move(-controller.get_analog(ANALOG_RIGHT_X), controller.get_analog(ANALOG_RIGHT_X));
     }
 
-	if (cataSwitch.get_value() !=0) {
-		cata.move(-127);				}
-	else if (controller.get_digital_new_press(DIGITAL_R1)){
+	// if (cataSwitch.get_value() !=0) {
+	// 	cata.move(-127);				}
+	// else if (controller.get_digital_new_press(DIGITAL_R1)){
+	// 	cata.move(-127);
+	// }
+	// if (controller.get_digital_new_press(DIGITAL_DOWN)){ //Half cata on
+	// 	half = true;
+	// 	cata.tare_position();
+	// 	cata.move_absolute(100, 100);
+	// }
+	// while (half != false){ //Half cata off
+	// 	if (controller.get_digital_new_press(DIGITAL_Y)){
+	// 		half = false; 
+	// 	}
+	// }
+	if (!cataDown){
 		cata.move(-127);
+		cataDown = cataSwitch.get_value();
 	}
-	if (controller.get_digital_new_press(DIGITAL_DOWN)){ //Half cata on
-		half = true;
-		cata.tare_position();
-		cata.move_absolute(100, 100);
-	}
-	while (half != false){ //Half cata off
-		if (controller.get_digital_new_press(DIGITAL_Y)){
-			half = false; 
+	else{
+		cata.move(0);
+		if (controller.get_digital_new_press(DIGITAL_R1)){
+			cata.move(-127);
 		}
+		if (controller.get_digital_new_press(DIGITAL_DOWN)){
+			half = true;
+			cata.tare_position();
+			cata.move_absolute(300, 100);
+		}
+		while (half != false){
+			cata.move(0);
+			if (controller.get_digital_new_press(DIGITAL_Y)){
+				half = false;
+			}
+		}
+		cataDown = cataSwitch.get_value();
 	}
 
 	// Intake
