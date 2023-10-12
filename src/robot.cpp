@@ -21,3 +21,5 @@ pros::ADIDigitalIn cataSwitch(3);
 
 //wing piston testing
 pros::ADIDigitalOut wings(1, false);
+
+pros::Imu imu(8);
