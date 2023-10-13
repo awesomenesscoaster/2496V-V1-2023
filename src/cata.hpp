@@ -26,10 +26,9 @@ namespace catapult {
                 cata.move(-127);
                 if (cataSwitch.get_value()) {
                     cata.move(0);
-                    state = idle;
+                    state = idle; 
                 }
                 break;
-
             case halfState:
                 if(t1.time() < 650) {
                     cata.move(-127);
@@ -38,7 +37,6 @@ namespace catapult {
                     state = idle;
                     cata.move(0);
                 }
-
             case idle:
                 break;
         }
