@@ -37,6 +37,7 @@ namespace catapult {
                     state = idle;
                     cata.move(0);
                 }
+                break;
             case idle:
                 break;
         }
