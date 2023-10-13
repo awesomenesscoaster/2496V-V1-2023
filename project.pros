@@ -309,8 +309,12 @@
       }
     },
     "upload_options": {
+<<<<<<< HEAD
       "slot": 4,
       "description": "Hi"
+=======
+      "slot": 2
+>>>>>>> ed2e9d1bdf85cb154ba9be3e604c7f0b7fec6b7a
     }
   }
 }

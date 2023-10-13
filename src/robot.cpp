@@ -17,7 +17,13 @@ pros::Motor rm(5, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 pros::Motor rb(6, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 
 pros::Motor intake(9, MOTOR_GEARSET_6, true, pros::E_MOTOR_ENCODER_DEGREES);
+<<<<<<< HEAD
 pros::ADIDigitalIn cataSwitch(2);
+=======
+pros::ADIDigitalIn cataSwitch(3);
+>>>>>>> ed2e9d1bdf85cb154ba9be3e604c7f0b7fec6b7a
 
 //wing piston testing
 pros::ADIDigitalOut wings(1, false);
+
+pros::Imu imu(8);
