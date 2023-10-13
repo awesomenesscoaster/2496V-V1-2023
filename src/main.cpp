@@ -13,9 +13,9 @@
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Initialized");
-	imu.reset();
+	//imu.reset();
 }
-
+//hello
 void disabled() {}
 
 void competition_initialize() {}

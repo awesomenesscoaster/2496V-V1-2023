@@ -21,7 +21,6 @@ extern pros::Motor intake;
 
 extern pros::ADIDigitalOut wings;
 
-extern pros::Imu imu;
 
 
 #endif

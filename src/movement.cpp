@@ -19,6 +19,11 @@ void move(float power){
     right(power);
 }
 
+void spin(float power){
+    left(power);
+    right(-power);
+}
+
 void moveTo(float power, float target) {
     lf.tare_position();
     float kP = 0;
