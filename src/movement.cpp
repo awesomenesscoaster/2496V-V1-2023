@@ -2,6 +2,20 @@
 #include "robot.h"
 #include "movement.h"
 
+
+int sgn(double input){
+    return input/std::abs(input);
+}
+
+void chas_move(float left_power, float right_power){
+    lf.move(left_power);
+    lm.move(left_power);
+    lb.move(left_power);
+    rf.move(right_power);
+    rm.move(right_power);
+    rb.move(right_power);
+}
+
 void left(float power) {
     lf.move(power);
     lm.move(power);

@@ -21,6 +21,8 @@ extern pros::Motor intake;
 
 extern pros::ADIDigitalOut wings;
 
+void chas_move(float left_power, float right_power);
+int sgn(double input);
 
 
 #endif
