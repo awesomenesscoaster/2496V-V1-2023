@@ -14,6 +14,18 @@ bool half = false;
 bool wingState = false;
 
 void driver(){
+	float leftMotorTemp, rightMotorTemp;
+	leftMotorTemp = (lf.get_temperature() + lm.get_temperature() + lb.get_temperature())/3;
+	rightMotorTemp = (lf.get_temperature() + lm.get_temperature() + lb.get_temperature())/3;
+
+	int printTimer = 0;
+	if(!(printTimer % 5)){
+		controller.print(0,0,"%f", leftMotorTemp);
+		controller.print(2,0,"%f", rightMotorTemp);
+	}
+	printTimer += 1;
+
+
     cata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	lf.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -26,8 +38,8 @@ void driver(){
 	float lPwr, rPwr;
 	float lAxis, rAxis;
 
-	rAxis = controller.get_analog(ANALOG_RIGHT_Y) ;
-	lAxis = controller.get_analog(ANALOG_LEFT_Y);
+	lAxis = controller.get_analog(ANALOG_LEFT_Y) ;
+	rAxis = controller.get_analog(ANALOG_RIGHT_Y);
 
 	rPwr = (abs(rAxis) > 2) ? (sgn(rAxis)) * (-127 * cos((2*M_PI*rAxis)/508)+127) : 0;
 	lPwr = (abs(lAxis) > 2) ? (sgn(lAxis)) * (-127 * cos((2*M_PI*lAxis)/508)+127) : 0;
@@ -42,10 +54,10 @@ void driver(){
 	}
 	catapult::run();
 
-	if (controller.get_digital(DIGITAL_L1)) {
+	if (controller.get_digital(DIGITAL_L2)) {
 		intake.move(127);	
 	}	
-	else if (controller.get_digital(DIGITAL_L2)) {
+	else if (controller.get_digital(DIGITAL_L1)) {
 		intake.move(-127);
 	}
 	else {

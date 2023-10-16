@@ -25,12 +25,13 @@ namespace catapult {
             case reloading:
                 cata.move(-127);
                 if (cataSwitch.get_value()) {
+                    pros::delay(15);
                     cata.move(0);
                     state = idle; 
                 }
                 break;
             case halfState:
-                if(t1.time() < 650) {
+                if(t1.time() < 600) {
                     cata.move(-127);
                 }
                 else {

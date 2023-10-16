@@ -23,6 +23,7 @@ void competition_initialize() {}
 void autonomous() {}
 
 void opcontrol() {
+	controller.clear();
 	while (true) {
 		driver();
 		pros::delay(20);

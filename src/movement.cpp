@@ -28,7 +28,7 @@ void right(float power) {
     rb.move(power);
 }
 
-void move(float power){
+void move1(float power){
     left(power);
     right(power);
 }
@@ -36,6 +36,12 @@ void move(float power){
 void spin(float power){
     left(power);
     right(-power);
+}
+
+void timedMove(int speed, int time){
+    chas_move(speed, speed);
+    pros::delay(time);
+    chas_move(0,0);
 }
 
 void moveTo(float power, float target) {
@@ -65,4 +71,17 @@ void moveTo(float power, float target) {
             break;
         }
     }
+}
+
+void resetEncoders(){
+    lf.tare_position();
+    lm.tare_position();
+    lb.tare_position();
+    rf.tare_position();
+    rm.tare_position();
+    rb.tare_position();
+}
+
+void absMove(){
+    
 }
