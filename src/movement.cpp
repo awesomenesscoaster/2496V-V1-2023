@@ -72,7 +72,7 @@ void moveTo(float power, float target) {
             integral = 0;
         } 
         float derivative = prevError - error;
-        move(kP*error+kI*integral+kD*derivative);
+        move1(kP*error+kI*integral+kD*derivative);
         if(error < 1){
             x++;
         }
@@ -82,7 +82,7 @@ void moveTo(float power, float target) {
     }
 }
 
-void move(float target, float toggle_slew, float slew_rate, float power_cap){
+void move(float target, bool toggle_slew, float slew_rate, float power_cap){
     float encoder_average;
     float voltage;
     float currPos = 0;
@@ -120,8 +120,44 @@ void move(float target, float toggle_slew, float slew_rate, float power_cap){
         if(count >= 10){
             break;
         }
+        pros::delay(10);
     }
+    chas_move(0,0);
 
+}
+
+void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap){
+    float voltage;
+    float currPos = 0;
+    float heading;
+    int printTimer = 0;
+    int count = 0;
+    
+    PID absRotate(TURN_KP, TURN_KI, TURN_KD);
+
+    controller.clear();
+    absRotate.resetVars();
+
+    while(true){
+        currPos = fmod(imu.get_rotation() - heading, 360);
+        voltage = absRotate.calc(target, currPos, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL, slew_rate, toggle_slew);
+
+        chas_move(voltage, -voltage);
+
+        if(!(printTimer % 5)){
+            controller.print(0,0,"%f", currPos);
+        }
+        printTimer += 1;
+
+        if(std::abs(target-currPos) <= 50){
+            count++;
+        }
+        if(count >= 10){
+            break;
+        }
+        pros::delay(10);
+    }
+    chas_move(0,0);
 }
 
 

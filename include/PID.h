@@ -7,6 +7,14 @@
 #define STRAIGHT_INTEGRAL_KICK 0
 #define STRAIGHT_MAX_INTEGRAL 0 
 
+#define TURN_KP 0
+#define TURN_KI 0
+#define TURN_KD 0
+
+#define TURN_INTEGRAL_KICK 0
+#define TURN_MAX_INTEGRAL 0 
+
+
 class PID{
 public:
     float error = 0;
