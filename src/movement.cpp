@@ -1,10 +1,19 @@
 #include "main.h"
 #include "robot.h"
 #include "movement.h"
-
+#include "PID.h"
 
 int sgn(double input){
     return input/std::abs(input);
+}
+
+void resetEncoders(){
+    lf.tare_position();
+    lm.tare_position();
+    lb.tare_position();
+    rf.tare_position();
+    rm.tare_position();
+    rb.tare_position();
 }
 
 void chas_move(float left_power, float right_power){
@@ -73,15 +82,47 @@ void moveTo(float power, float target) {
     }
 }
 
-void resetEncoders(){
-    lf.tare_position();
-    lm.tare_position();
-    lb.tare_position();
-    rf.tare_position();
-    rm.tare_position();
-    rb.tare_position();
+void move(float target, float toggle_slew, float slew_rate, float power_cap){
+    float encoder_average;
+    float voltage;
+    float currPos = 0;
+    int printTimer = 0;
+    float imuPos;
+    int count = 0;
+    
+    PID straight(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+
+    resetEncoders();
+    controller.clear();
+    straight.resetVars();
+    imuPos = imu.get_rotation();
+
+    while(true){
+        encoder_average = (lb.get_position()+rb.get_position())/2;
+
+        currPos = target - encoder_average;
+        if(!(printTimer % 5)){
+            controller.print(0,0,"%f",currPos);
+        }
+        printTimer += 1;
+
+        voltage = straight.calc(target, encoder_average, STRAIGHT_INTEGRAL_KICK, STRAIGHT_MAX_INTEGRAL, slew_rate , toggle_slew);
+
+        if(std::abs(voltage) > power_cap){
+            voltage = power_cap*voltage/std::abs(voltage);
+        }
+
+        chas_move(voltage, voltage);
+
+        if(std::abs(target-encoder_average <= 4)){
+            count++;
+        }
+        if(count >= 10){
+            break;
+        }
+    }
+
 }
 
-void absMove(){
-    
-}
+
+

@@ -14,6 +14,7 @@ bool half = false;
 bool wingState = false;
 
 void driver(){
+	// Chassis Temperature
 	float leftMotorTemp, rightMotorTemp;
 	leftMotorTemp = (lf.get_temperature() + lm.get_temperature() + lb.get_temperature())/3;
 	rightMotorTemp = (lf.get_temperature() + lm.get_temperature() + lb.get_temperature())/3;
@@ -25,7 +26,7 @@ void driver(){
 	}
 	printTimer += 1;
 
-
+	// Initialize Brake Modes
     cata.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	lf.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -35,6 +36,7 @@ void driver(){
 	rm.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	rb.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
+	// Tank Graph
 	float lPwr, rPwr;
 	float lAxis, rAxis;
 
@@ -46,6 +48,7 @@ void driver(){
 
 	chas_move(lPwr, rPwr);
 
+	// Cata Control
 	if(controller.get_digital_new_press(DIGITAL_R1)) {
 		catapult::fire();
 	}
@@ -54,6 +57,7 @@ void driver(){
 	}
 	catapult::run();
 
+	//Intake Control
 	if (controller.get_digital(DIGITAL_L2)) {
 		intake.move(127);	
 	}	
@@ -64,6 +68,7 @@ void driver(){
 		intake.move(0);
 	}
 	
+	//Wings Control
 	if(controller.get_digital_new_press(DIGITAL_DOWN)){
 		wings.set_value(!wingState);
 		wingState = !wingState;

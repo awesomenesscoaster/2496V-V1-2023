@@ -1,5 +1,12 @@
 #include "main.h"
 
+#define STRAIGHT_KP 0
+#define STRAIGHT_KI 0
+#define STRAIGHT_KD 0
+
+#define STRAIGHT_INTEGRAL_KICK 0
+#define STRAIGHT_MAX_INTEGRAL 0 
+
 class PID{
 public:
     float error = 0;
@@ -18,7 +25,16 @@ public:
         m_kd = kd;
     }
 
-    float calc(float target, float input, float integral_KI, float maxI, float slew){
+    void resetVars(){
+        error = 0;
+        prev_error = 0;
+        integral = 0;
+        derivative = 0;
+        power = 0;
+        prev_power = 0;
+    }
+    
+    float calc(float target, float input, float integral_KI, float maxI, float slew, bool slew_switch){
         prev_power = power;
         prev_error = error;
         error = target - input;
@@ -40,5 +56,15 @@ public:
         }
 
         power = m_kp*error + m_ki*integral + m_kd*derivative;
+
+        if(slew_switch){
+            if(power <= prev_power + slew){
+                slew_switch = false;
+            }
+            if(power-prev_power <= slew){
+                power = prev_power + slew;
+            }
+        }
+        return power;
     }
 };

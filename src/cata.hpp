@@ -25,7 +25,6 @@ namespace catapult {
             case reloading:
                 cata.move(-127);
                 if (cataSwitch.get_value()) {
-                    pros::delay(15);
                     cata.move(0);
                     state = idle; 
                 }
