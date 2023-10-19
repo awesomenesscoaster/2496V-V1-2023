@@ -1,6 +1,5 @@
 #include "main.h"
 #include "robot.h"
-#include "movement.h"
 #include "PID.h"
 
 int sgn(double input){
@@ -82,7 +81,7 @@ void moveTo(float power, float target) {
     }
 }
 
-void move(float target, bool toggle_slew, float slew_rate, float power_cap){
+void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
     float encoder_average;
     float voltage;
     float currPos = 0;

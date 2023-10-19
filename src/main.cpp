@@ -20,7 +20,9 @@ void disabled() {}
 
 void competition_initialize() {}
 
-void autonomous() {}
+void autonomous() {
+	moveTest(2000);
+}
 
 void opcontrol() {
 	controller.clear();

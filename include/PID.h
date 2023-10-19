@@ -1,8 +1,8 @@
 #include "main.h"
 
-#define STRAIGHT_KP 0
-#define STRAIGHT_KI 0
-#define STRAIGHT_KD 0
+#define STRAIGHT_KP 0.14 //0.14
+#define STRAIGHT_KI 0.21 //0.21
+#define STRAIGHT_KD 0.3 //0.3
 
 #define STRAIGHT_INTEGRAL_KICK 0
 #define STRAIGHT_MAX_INTEGRAL 0 
@@ -27,7 +27,7 @@ public:
     float power = 0;
     float prev_power = 0;
 
-    PID(float ki, float kp, float kd){
+    PID(float kp, float ki, float kd){
         m_kp = kp;
         m_ki = ki;
         m_kd = kd;
