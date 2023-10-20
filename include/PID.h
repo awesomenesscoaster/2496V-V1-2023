@@ -11,8 +11,8 @@
 #define TURN_KI 0
 #define TURN_KD 0
 
-#define TURN_INTEGRAL_KICK 0
-#define TURN_MAX_INTEGRAL 0 
+#define TURN_INTEGRAL_KICK 5
+#define TURN_MAX_INTEGRAL 127
 
 
 class PID{

@@ -139,12 +139,27 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap){
     int printTimer = 0;
     int count = 0;
 
-    if(target < 90){
-        turnKP = 1.6;
-        turnKI = 0;
-        turnKD = 1.2;
+    if(std::abs(target) <= 45){
+        turnKP = 1.52; // 1.1
+        turnKI = 0.015;
+        turnKD = 1.6; //1.3
     }
-    
+    else if(std::abs(target) <= 90){
+        turnKP = 1.2; //// 1.05
+        turnKI = 0.005; // 0.035
+        turnKD = 1.6; // 1.35
+    }
+    else if(std::abs(target) <= 135){
+        turnKP = 1.1;
+        turnKI = 0.005;
+        turnKD = 1.9;
+    }
+    else if(target <= 180){
+        turnKP = 0;
+        turnKI = 0;
+        turnKD = 0;
+    }
+
     PID absRotate(turnKP, turnKI, turnKD);
 
     controller.clear();
@@ -169,11 +184,11 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap){
         }
         printTimer += 1;
 
-        if(std::abs(target-currPos) <= 50){
+        if(std::abs(target-currPos) <= .75){
             count++;
         }
         if(count >= 10){
-            // break;
+            break;
         }
         pros::delay(10);
     }
