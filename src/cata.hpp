@@ -9,7 +9,9 @@ namespace catapult {
         firing,
         halfState,
         idle,
-        reloading
+        reloading,
+        matchloading,
+        move
     };
     cataStates state;
     Timer t1;
@@ -25,19 +27,21 @@ namespace catapult {
             case reloading:
                 cata.move(-127);
                 if (cataSwitch.get_value()) {
-                    pros::delay(1);
                     cata.move(0);
                     state = idle;
                 }
                 break;
             case halfState:
-                if(t1.time() < 600) {
+                if(t1.time() < 700) {
                     cata.move(-127);
                 }
                 else {
                     state = idle;
                     cata.move(0);
                 }
+                break;
+            case matchloading:
+                cata.move(-100);
                 break;
             case idle:
                 break;
@@ -51,6 +55,11 @@ namespace catapult {
         state = halfState;
         t1.reset();
     }
+
+    void matchload() {
+        state = matchloading;
+    }
+
 }
 
 #endif

@@ -43,17 +43,22 @@ void driver(){
 	lAxis = controller.get_analog(ANALOG_LEFT_Y) ;
 	rAxis = controller.get_analog(ANALOG_RIGHT_Y);
 
-	rPwr = (abs(rAxis) > 2) ? (sgn(rAxis)) * (-127 * cos((2*M_PI*rAxis)/508)+127) : 0;
-	lPwr = (abs(lAxis) > 2) ? (sgn(lAxis)) * (-127 * cos((2*M_PI*lAxis)/508)+127) : 0;
+	rPwr = rAxis;
+	lPwr = lAxis;
+
+	//rPwr = (abs(rAxis) > 2) ? (sgn(rAxis)) * (-127 * cos((2*3.14159*rAxis)/508)+127) : 0;
+	//lPwr = (abs(lAxis) > 2) ? (sgn(lAxis)) * (-127 * cos((2*3.14159*lAxis)/508)+127) : 0;
 
 	chas_move(lPwr, rPwr);
-
 	// Cata Control
 	if(controller.get_digital_new_press(DIGITAL_R1)) {
 		catapult::fire();
 	}
 	if (controller.get_digital_new_press(DIGITAL_R2)) {
 		catapult::half();
+	}
+	if(controller.get_digital_new_press(DIGITAL_B)) {
+		catapult::matchload();
 	}
 	catapult::run();
 
