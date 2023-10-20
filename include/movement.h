@@ -19,4 +19,5 @@ void turnTo(float power, float target);
 
 void moveTest(float target, bool toggle_slew = false, float slew_rate = 0,  float power_cap = 127);
 
+void absTurn(float target, bool toggle_slew = false, float slew_rate = 0, float power_cap = 127);
 #endif

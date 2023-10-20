@@ -86,7 +86,8 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
     float voltage;
     float currPos = 0;
     int printTimer = 0;
-    float imuPos;
+    float imuInit;
+    float heading;
     int count = 0;
     
     PID straight(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
@@ -94,10 +95,13 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
     resetEncoders();
     controller.clear();
     straight.resetVars();
-    imuPos = imu.get_rotation();
+    imuInit = imu.tare_rotation();
 
     while(true){
         encoder_average = (lb.get_position()+rb.get_position())/2;
+
+        heading = imuInit - imu.get_rotation();
+        heading = heading * 3.5;
 
         currPos = target - encoder_average;
         if(!(printTimer % 5)){
@@ -111,13 +115,13 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
             voltage = power_cap*voltage/std::abs(voltage);
         }
 
-        chas_move(voltage, voltage);
+        chas_move(voltage + heading, voltage - heading);
 
         if(std::abs(target-encoder_average <= 4)){
             count++;
         }
         if(count >= 10){
-            break;
+            //break;
         }
         pros::delay(10);
     }
@@ -127,18 +131,35 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
 
 void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap){
     float voltage;
+    float turnKI;
+    float turnKD;
+    float turnKP;
     float currPos = 0;
     float heading;
     int printTimer = 0;
     int count = 0;
+
+    if(target < 90){
+        turnKP = 1.6;
+        turnKI = 0;
+        turnKD = 1.2;
+    }
     
-    PID absRotate(TURN_KP, TURN_KI, TURN_KD);
+    PID absRotate(turnKP, turnKI, turnKD);
 
     controller.clear();
     absRotate.resetVars();
 
     while(true){
-        currPos = fmod(imu.get_rotation() - heading, 360);
+        // currPos = fmod(imu.get_heading() - heading, 360);
+
+        if(imu.get_heading() > 180){
+            currPos = imu.get_heading() - 360;
+        }
+        else{
+            currPos = imu.get_heading();
+        }
+
         voltage = absRotate.calc(target, currPos, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL, slew_rate, toggle_slew);
 
         chas_move(voltage, -voltage);
@@ -152,7 +173,7 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap){
             count++;
         }
         if(count >= 10){
-            break;
+            // break;
         }
         pros::delay(10);
     }
