@@ -154,8 +154,8 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap){
         turnKI = 0.005;
         turnKD = 1.9;
     }
-    else if(target <= 180){
-        turnKP = 0;
+    else if(target < 180){
+        turnKP = 1.6;
         turnKI = 0;
         turnKD = 0;
     }
