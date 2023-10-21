@@ -1,7 +1,4 @@
-#ifndef __UTIL__
-#define __UTIL__
-
-
+#include "util.h"
 #include "main.h"
 
 class Timer {
@@ -12,5 +9,3 @@ class Timer {
         void reset() {t = pros::millis();}
         int time() {return (pros::millis() - t);}
 };
-
-#endif
