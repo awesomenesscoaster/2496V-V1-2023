@@ -11,6 +11,8 @@ void right(float power);
 
 void move(float power);
 
+void straightEncoder(int encoderValue, float power);
+
 void spin(float power);
 
 void moveTo(float power, float target);

@@ -10,8 +10,9 @@
 #include <iostream>
 
 void rightSide(){
-    catapult::half();
-}
+    moveTest(-2500);
+    // moveTest(-2000)
+} 
 // double kP;
 // double kI;
 // double maximum;

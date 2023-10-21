@@ -6,7 +6,6 @@ namespace catapult {
     Timer t1 = Timer();
     cataStates state = idle;
     void run() {
-        while(true) {
             switch (state)
                 {
                 case firing:
@@ -37,7 +36,6 @@ namespace catapult {
                 case idle:
                     break;
             }
-        }
     }
 
     void fire() {

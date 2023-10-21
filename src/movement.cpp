@@ -41,6 +41,16 @@ void move1(float power){
     right(power);
 }
 
+void straightEncoder(int encoderValue, float power){
+    rf.move_relative(encoderValue, power);
+    rm.move_relative(encoderValue, power);
+    rb.move_relative(encoderValue, power);
+    lf.move_relative(encoderValue, power);
+    lm.move_relative(encoderValue, power);
+    lb.move_relative(encoderValue, power);
+
+}
+
 void spin(float power){
     left(power);
     right(-power);
@@ -121,7 +131,7 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
             count++;
         }
         if(count >= 10){
-            //break;
+          //  break;
         }
         pros::delay(10);
     }
@@ -197,11 +207,11 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap) {
     printTimer += 1;
 
 
-    if (std::abs(target - currPos) <= .75) {
+    if (std::abs(target - currPos) <= 2) {
       count++;
     }
     if (count >= 10) {
-      // break;
+      break;
     }
     pros::delay(10);
   }
