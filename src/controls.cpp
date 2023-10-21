@@ -10,7 +10,7 @@
 
 #define _USE_MATH_DEFINE
 
-bool half = false;
+// bool half = false;
 bool wingState = false;
 
 void driver(){

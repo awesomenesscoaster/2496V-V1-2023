@@ -129,71 +129,83 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
 
 }
 
-void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap){
-    float voltage;
-    float turnKI;
-    float turnKD;
-    float turnKP;
-    float currPos = 0;
-    float heading;
-    int printTimer = 0;
-    int count = 0;
+void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap) {
+  float voltage;
+  float turnKI;
+  float turnKD;
+  float turnKP;
+  float currPos = 0;
+  float heading;
+  int printTimer = 0;
+  int count = 0;
 
-    if(std::abs(target) <= 45){
-        turnKP = 1.52; // 1.1
-        turnKI = 0.015;
-        turnKD = 1.6; //1.3
+
+  if (std::abs(target) <= 45) {
+    turnKP = 1.52; // 1.1
+    turnKI = 0.015;
+    turnKD = 1.6; // 1.3
+  } else if (std::abs(target) <= 90) {
+    turnKP = 1.2;   //// 1.05
+    turnKI = 0.005; // 0.035
+    turnKD = 1.6;   // 1.35
+  } else if (std::abs(target) <= 135) {
+    turnKP = 1.1;
+    turnKI = 0.005;
+    turnKD = 1.9;
+  } else if (target <= 180) {
+    turnKP = 1;
+    turnKI = 0.015;
+    turnKD = 1.95;
+  }
+
+  PID absRotate(turnKP, turnKI, turnKD);
+
+  controller.clear();
+  absRotate.resetVars();
+  imu.tare_rotation();
+
+  while (true) {
+    // currPos = fmod(imu.get_heading() - heading, 360);
+
+    if (target > 175) {
+      if (imu.get_heading() > 300) {
+        currPos = imu.get_heading() - 360;
+      } else {
+        currPos = imu.get_heading();
+      }
+    } else if (target < -175) {
+      if (imu.get_heading() > 60) {
+        currPos = imu.get_heading() - 360;
+      } else {
+        currPos = imu.get_heading();
+      }
+    } else {
+      if (imu.get_heading() > 180) {
+        currPos = imu.get_heading() - 360;
+      } else {
+        currPos = imu.get_heading();
+      }
     }
-    else if(std::abs(target) <= 90){
-        turnKP = 1.2; //// 1.05
-        turnKI = 0.005; // 0.035
-        turnKD = 1.6; // 1.35
+
+    voltage = absRotate.calc(target, currPos, TURN_INTEGRAL_KICK,TURN_MAX_INTEGRAL, slew_rate, toggle_slew);
+
+    chas_move(voltage, -voltage);
+
+    if (!(printTimer % 5)) {
+      controller.print(0, 0, "%f", currPos);
     }
-    else if(std::abs(target) <= 135){
-        turnKP = 1.1;
-        turnKI = 0.005;
-        turnKD = 1.9;
+    printTimer += 1;
+
+
+    if (std::abs(target - currPos) <= .75) {
+      count++;
     }
-    else if(target < 180){
-        turnKP = 1.6;
-        turnKI = 0;
-        turnKD = 0;
+    if (count >= 10) {
+      // break;
     }
-    
-    PID absRotate(turnKP, turnKI, turnKD);
-
-    controller.clear();
-    absRotate.resetVars();
-
-    while(true){
-        // currPos = fmod(imu.get_heading() - heading, 360);
-
-        if(imu.get_heading() > 180){
-            currPos = imu.get_heading() - 360;
-        }
-        else{
-            currPos = imu.get_heading();
-        }
-
-        voltage = absRotate.calc(target, currPos, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL, slew_rate, toggle_slew);
-
-        chas_move(voltage, -voltage);
-
-        if(!(printTimer % 5)){
-            controller.print(0,0,"%f", currPos);
-        }
-        printTimer += 1;
-
-        if(std::abs(target-currPos) <= 50){
-            count++;
-        }
-        if(count >= 10){
-            // break;
-        }
-        pros::delay(10);
-    }
-    chas_move(0,0);
+    pros::delay(10);
+  }
+  chas_move(0, 0);
 }
-
 
 
