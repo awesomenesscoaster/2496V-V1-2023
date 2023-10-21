@@ -60,7 +60,6 @@ void driver(){
 	if(controller.get_digital_new_press(DIGITAL_B)) {
 		catapult::matchload();
 	}
-	catapult::run();
 
 	//Intake Control
 	if (controller.get_digital(DIGITAL_L2)) {

@@ -15,6 +15,7 @@
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Initialized");
+	pros::Task cataTask(catapult::run);
 	//imu.reset();
 }
 //hello
