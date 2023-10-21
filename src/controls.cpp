@@ -3,7 +3,7 @@
 #include "pros/misc.h"
 #include "pros/motors.h"
 #include "robot.h"
-#include "cata.cpp"
+#include "cata.h"
 #include <cmath>
 #include <fstream>
 #include <iostream>
