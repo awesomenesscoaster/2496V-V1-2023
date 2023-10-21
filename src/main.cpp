@@ -10,8 +10,6 @@
 #include <fstream>
 #include <iostream>
 
-#define _USE_MATH_DEFINE
-
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Initialized");

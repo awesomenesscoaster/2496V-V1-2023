@@ -5,8 +5,10 @@
 namespace catapult {
     Timer t1 = Timer();
     cataStates state = idle;
+    pros::Mutex smtx;
     void run() {
         while(true) {
+            smtx.lock();
             switch (state)
                 {
                 case firing:
@@ -37,19 +39,27 @@ namespace catapult {
                 case idle:
                     break;
             }
+            smtx.unlock();
+            pros::delay(20);
         }
     }
 
     void fire() {
+        smtx.lock();
         state = firing;
+        smtx.unlock();
     }
     void half() {
+        smtx.lock();
         state = halfState;
         t1.reset();
+        smtx.unlock();
     }
 
     void matchload() {
+        smtx.lock();
         state = matchloading;
+        smtx.unlock();
     }
 
 }

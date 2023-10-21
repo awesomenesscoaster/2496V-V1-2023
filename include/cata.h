@@ -13,6 +13,8 @@ namespace catapult{
     };
     extern cataStates state;
     extern Timer t1;
+    extern pros::Mutex smtx;
+
     extern void run();
     extern void fire();
     extern void half();
