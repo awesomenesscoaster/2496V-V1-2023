@@ -10,6 +10,7 @@
 #include <iostream>
 
 void rightSide(){
+    moveTest(10,10,10,10);
     catapult::half();
 }
 // double kP;
