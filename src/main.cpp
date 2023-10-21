@@ -3,6 +3,7 @@
 #include "robot.h"
 #include "movement.h"
 #include "controls.h"
+#include "cata.hpp"
 #include <valarray>
 #include <cmath>
 #include <fstream>
@@ -21,7 +22,8 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	absTurn(150);
+	catapult::run();
+	catapult::half();
 	// moveTest(2000);
 }
 

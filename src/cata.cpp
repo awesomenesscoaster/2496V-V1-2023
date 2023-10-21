@@ -1,6 +1,3 @@
-#ifndef __CATA__
-#define __CATA__
-
 #include "robot.h"
 #include "util.cpp"
 
@@ -61,5 +58,3 @@ namespace catapult {
     }
 
 }
-
-#endif
