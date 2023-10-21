@@ -1,20 +1,10 @@
-#ifndef __CATA__
-#define __CATA__
-
 #include "robot.h"
 #include "util.cpp"
+#include "cata.h"
 
 namespace catapult {
-    enum cataStates {
-        firing,
-        halfState,
-        idle,
-        reloading,
-        matchloading,
-        move
-    };
-    cataStates state;
-    Timer t1;
+    Timer t1 = Timer();
+    cataStates state = idle;
     void run() {
         switch (state)
         {
@@ -61,5 +51,3 @@ namespace catapult {
     }
 
 }
-
-#endif

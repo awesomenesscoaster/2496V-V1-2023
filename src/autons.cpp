@@ -1,7 +1,7 @@
 #include "main.h"
 #include "pros/misc.h"
 #include "robot.h"
-#include "cata.hpp"
+#include "cata.h"
 #include "movement.h"
 #include "controls.h"
 #include <valarray>

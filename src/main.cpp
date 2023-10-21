@@ -4,7 +4,7 @@
 #include "robot.h"
 #include "movement.h"
 #include "controls.h"
-#include "cata.hpp"
+#include "cata.h"
 #include <valarray>
 #include <cmath>
 #include <fstream>

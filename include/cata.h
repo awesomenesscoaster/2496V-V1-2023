@@ -1,8 +1,6 @@
-#include "robot.h"
-#include "util.h"
+#pragma once
 
-#ifndef __CATA__
-#define __CATA__
+#include "util.h"
 
 namespace catapult{
     enum cataStates {
@@ -13,13 +11,10 @@ namespace catapult{
         matchloading,
         move
     };
-    cataStates state;
-    Timer t1;
-    void run();
-    void fire();
-    void half();
-    void matchload();
+    extern cataStates state;
+    extern Timer t1;
+    extern void run();
+    extern void fire();
+    extern void half();
+    extern void matchload();
 };
-
-
-#endif
