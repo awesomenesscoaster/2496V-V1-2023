@@ -1,6 +1,7 @@
 #include "main.h"
 #include "pros/misc.h"
 #include "robot.h"
+#include "cata.hpp"
 #include "movement.h"
 #include "controls.h"
 #include <valarray>
@@ -8,6 +9,9 @@
 #include <fstream>
 #include <iostream>
 
+void rightSide(){
+    catapult::half();
+}
 // double kP;
 // double kI;
 // double maximum;

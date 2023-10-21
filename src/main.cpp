@@ -1,5 +1,6 @@
 #include "main.h"
 #include "pros/misc.h"
+#include "autons.h"
 #include "robot.h"
 #include "movement.h"
 #include "controls.h"
@@ -21,7 +22,7 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	absTurn(150);
+	rightSide();
 	// moveTest(2000);
 }
 
