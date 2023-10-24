@@ -131,7 +131,7 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
             count++;
         }
         if(count >= 10){
-          //  break;
+           break;
         }
         pros::delay(10);
     }
@@ -207,7 +207,7 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap) {
     printTimer += 1;
 
 
-    if (std::abs(target - currPos) <= 2) {
+    if (std::abs(target - currPos) <= 0.75) {
       count++;
     }
     if (count >= 10) {

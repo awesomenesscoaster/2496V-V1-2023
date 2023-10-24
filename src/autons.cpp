@@ -10,7 +10,11 @@
 #include <iostream>
 
 void rightSide(){
-    moveTest(-2500);
+    moveTest(2500);
+    absTurn(180);
+    controller.clear();
+    moveTest(1000);
+    catapult::half();
     // moveTest(-2000)
 } 
 // double kP;

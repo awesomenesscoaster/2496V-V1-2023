@@ -1,7 +1,7 @@
 #include "main.h"
 
 #define STRAIGHT_KP 0.5 //0.5
-#define STRAIGHT_KI 0.025 //0.03
+#define STRAIGHT_KI 0.027 //0.03
 #define STRAIGHT_KD 5.2 //5.2
 
 #define STRAIGHT_INTEGRAL_KICK 50
