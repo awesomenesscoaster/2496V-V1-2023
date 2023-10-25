@@ -127,7 +127,7 @@ void moveTest(float target, bool toggle_slew, float slew_rate, float power_cap){
 
         chas_move(voltage + heading, voltage - heading);
 
-        if(std::abs(target-encoder_average <= 4)){
+        if(std::abs(target-encoder_average) <= 4){
             count++;
         }
         if(count >= 10){

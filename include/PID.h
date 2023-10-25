@@ -56,7 +56,7 @@ public:
             integral = 0;
         }
 
-        if(integral > 0){
+        if(std::abs(integral) > 0){
             integral = std::min(integral, maxI);
         }
         else{

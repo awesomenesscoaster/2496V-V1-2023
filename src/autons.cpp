@@ -9,44 +9,28 @@
 #include <fstream>
 #include <iostream>
 
-void rightSide(){
-    moveTest(2500);
-    absTurn(180);
-    controller.clear();
-    moveTest(1000);
-    catapult::half();
-    // moveTest(-2000)
+void rightSideQual(){
+    wings.set_value(false);
+    pros::delay(200);
+    moveTest(-1250);
+    pros::delay(200);
+    wings.set_value(true);
+    pros::delay(200);
+    absTurn(-30);
 } 
-// double kP;
-// double kI;
-// double maximum;
 
-// void chasPID(double target){
-//     double error;
-//     double voltage;
-//     double integral;
-//     double current;
-//     int counter;
+void leftSideQual(){
 
-//     while(current < target){
-//         current = lf.get_encoder_units();
-//         error = target - current;
-//         integral += error*(current/target);
-//         if (error == 10 || error > maximum){
-//             integral = 0;
-//         }
-        
-//         voltage = error*kP + integral*kI;
-//         pros::delay(15);
-//         counter++;
+}
 
-//         if (counter%10 == 0){
-//             controller.print(0, 2, "Error: %f", error);
-//             controller.print(1, 2, "Current: %f", current);
-//         }
+void rightSideElims(){
 
-//         left(voltage);
-//         right(voltage);
+}
 
-//     }
-// }
+void leftSideElims(){
+    
+}
+
+void skills(){
+
+}
