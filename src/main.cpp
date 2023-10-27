@@ -15,7 +15,7 @@
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Initialized");
-	wings.set_value(true);
+	wings.set_value(false);
 	imu.reset();
 }
 //hello
@@ -25,6 +25,7 @@ void competition_initialize() {}
 
 void autonomous() {
 	rightSideQual();
+	// absTurn(-30);
 	// moveTest(2000);
 }
 

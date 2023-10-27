@@ -20,6 +20,7 @@ extern pros::ADIDigitalIn cataSwitch;
 extern pros::Motor intake;
 
 extern pros::ADIDigitalOut wings;
+extern pros::ADIDigitalOut blocker;
 extern pros::Imu imu;
 
 void chas_move(float left_power, float right_power);

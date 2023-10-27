@@ -150,10 +150,15 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap) {
   int count = 0;
 
 
-  if (std::abs(target) <= 45) {
-    turnKP = 1.52; // 1.1
-    turnKI = 0.015;
-    turnKD = 1.6; // 1.3
+  if (std::abs(target) <= 30){
+    turnKP = 1.87;
+    turnKI = 0.027;
+    turnKD = 1.5;
+  }
+  else if (std::abs(target) <= 45) {
+    turnKP = 1.5; // 1.1
+    turnKI = 0.043; // 0.015
+    turnKD = 1.55; // 1.3
   } else if (std::abs(target) <= 90) {
     turnKP = 1.2;   //// 1.05
     turnKI = 0.005; // 0.035
@@ -162,7 +167,7 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap) {
     turnKP = 1.1;
     turnKI = 0.005;
     turnKD = 1.9;
-  } else if (target <= 180) {
+  } else if (std::abs(target) <= 180) {
     turnKP = 1;
     turnKI = 0.015;
     turnKD = 1.95;
@@ -207,7 +212,7 @@ void absTurn(float target, bool toggle_slew, float slew_rate, float power_cap) {
     printTimer += 1;
 
 
-    if (std::abs(target - currPos) <= 0.75) {
+    if (std::abs(target - currPos) <= 1) {
       count++;
     }
     if (count >= 10) {

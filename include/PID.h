@@ -7,10 +7,6 @@
 #define STRAIGHT_INTEGRAL_KICK 50
 #define STRAIGHT_MAX_INTEGRAL 200
 
-#define TURN_KP 0.1
-#define TURN_KI 0
-#define TURN_KD 0
-
 #define TURN_INTEGRAL_KICK 5
 #define TURN_MAX_INTEGRAL 127
 

@@ -12,6 +12,7 @@
 
 // bool half = false;
 bool wingState = false;
+bool blockerState = false;
 
 void driver(){
 	// Chassis Temperature
@@ -77,5 +78,11 @@ void driver(){
 	if(controller.get_digital_new_press(DIGITAL_DOWN)){
 		wings.set_value(!wingState);
 		wingState = !wingState;
+	}
+	
+	if(controller.get_digital_new_press(DIGITAL_A)){
+		blocker.set_value(!blockerState);
+		blockerState = !blockerState;
+
 	}
 }
