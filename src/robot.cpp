@@ -24,5 +24,5 @@ pros::ADIDigitalIn cataSwitch(2);
 pros::ADIDigitalOut blocker(3, false);
 pros::ADIDigitalOut wings(1, true);
 
-pros::Imu imu(8);
+pros::Imu imu(9);
 

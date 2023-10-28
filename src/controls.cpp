@@ -1,5 +1,6 @@
 #include "main.h"
 #include "movement.h"
+#include "autons.h"
 #include "pros/misc.h"
 #include "pros/motors.h"
 #include "robot.h"
@@ -84,5 +85,9 @@ void driver(){
 		blocker.set_value(!blockerState);
 		blockerState = !blockerState;
 
+	}
+
+	if(controller.get_digital_new_press(DIGITAL_LEFT)){
+		leftSideQual();
 	}
 }

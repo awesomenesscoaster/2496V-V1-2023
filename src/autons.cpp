@@ -27,11 +27,27 @@ void rightSideQual(){
     pros::delay(200);
     moveTest(200, 800);
     absTurn(-167, 1000);
-    moveTest(-2400, 2000);
+    moveTest(-2000, 2000);
 } 
 
 void leftSideQual(){
     moveTest(-2500, 1000);
+    pros::delay(200);
+    moveTest(400, 1000);
+    pros::delay(200);
+    absTurn(170, 1000);
+    wings.set_value(true);
+    pros::delay(200);
+    moveTest(-1000, 1000);
+    wings.set_value(false);
+    pros::delay(200);
+    moveTest(-200, 500);
+    pros::delay(400);
+    absTurn(-20, 500);
+    pros::delay(400);
+    moveTest(-2000, 1000);
+    
+
 }
 
 void rightSideElims(){

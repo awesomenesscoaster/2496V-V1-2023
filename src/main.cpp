@@ -24,7 +24,7 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	leftSideQual();
+	rightSideQual();
 	// absTurn(-35, 1000);
 	// moveTest(2000);
 }
