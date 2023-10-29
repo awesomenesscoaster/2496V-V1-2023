@@ -88,6 +88,6 @@ void driver(){
 	}
 
 	if(controller.get_digital_new_press(DIGITAL_LEFT)){
-		leftSideQual();
+		skills();
 	}
 }
