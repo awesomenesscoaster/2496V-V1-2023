@@ -1,7 +1,7 @@
 #include "main.h"
 
 #define STRAIGHT_KP 0.5   // 0.5
-#define STRAIGHT_KI 0.027 // 0.03
+#define STRAIGHT_KI 0.036 // 0.03
 #define STRAIGHT_KD 5.2   // 5.2
 
 #define STRAIGHT_INTEGRAL_KICK 50
@@ -37,8 +37,7 @@ public:
     prev_power = 0;
   }
 
-  float calc(float target, float input, float integral_KI, float maxI,
-             float slew, bool slew_switch) {
+  float calc(float target, float input, float integral_KI, float maxI) {
     prev_power = power;
     prev_error = error;
     error = target - input;
@@ -58,15 +57,6 @@ public:
     }
 
     power = m_kp * error + m_ki * integral + m_kd * derivative;
-
-    if (slew_switch) {
-      if (power <= prev_power + slew) {
-        slew_switch = false;
-      }
-      if (power - prev_power <= slew) {
-        power = prev_power + slew;
-      }
-    }
     return power;
   }
 };

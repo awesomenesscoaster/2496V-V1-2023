@@ -31,7 +31,7 @@ namespace catapult {
                     }
                     break;
                 case matchloading:
-                    cata.move(-100);
+                    cata.move(-127);
                     break;
                 case idle:
                     break;

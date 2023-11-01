@@ -88,7 +88,7 @@ void moveTo(float power, float target) {
   }
 }
 
-void moveTest(float target, float timeOut, bool toggle_slew, float slew_rate, float power_cap) {
+void moveTest(float target, float timeOut, float power_cap) {
   float encoder_average;
   float voltage;
   float currPos = 0;
@@ -109,7 +109,7 @@ void moveTest(float target, float timeOut, bool toggle_slew, float slew_rate, fl
     encoder_average = (lb.get_position() + rb.get_position()) / 2;
 
     heading = imuInit - imu.get_rotation();
-    heading = heading * 3.5;
+    heading = heading;
 
     currPos = target - encoder_average;
     if (!(printTimer % 5)) {
@@ -117,8 +117,7 @@ void moveTest(float target, float timeOut, bool toggle_slew, float slew_rate, fl
     }
     printTimer += 1;
 
-    voltage = straight.calc(target, encoder_average, STRAIGHT_INTEGRAL_KICK,
-                            STRAIGHT_MAX_INTEGRAL, slew_rate, toggle_slew);
+    voltage = straight.calc(target, encoder_average, STRAIGHT_INTEGRAL_KICK, STRAIGHT_MAX_INTEGRAL);
 
     if (std::abs(voltage) > power_cap) {
       voltage = power_cap * voltage / std::abs(voltage);
@@ -130,7 +129,7 @@ void moveTest(float target, float timeOut, bool toggle_slew, float slew_rate, fl
       break;
     }
 
-    if (std::abs(target - encoder_average) <= 4) {
+    if (std::abs(target - encoder_average) <= 0.8) {
       count++;
     }
     if (count >= 10) {
@@ -141,7 +140,17 @@ void moveTest(float target, float timeOut, bool toggle_slew, float slew_rate, fl
   chas_move(0, 0);
 }
 
-void absTurn(float target, float timeOut, bool toggle_slew, float slew_rate, float power_cap) {
+void absTurn(float target,  float timeOut){
+  float voltage;
+  float turnKi;
+  float turnKD;
+  float turnKP;
+  float heading;
+  int printTimer = 0;
+  int count = 0;
+}
+
+void relTurn(float target, float timeOut, float power_cap) {
   float voltage;
   float turnKI;
   float turnKD;
@@ -203,7 +212,7 @@ void absTurn(float target, float timeOut, bool toggle_slew, float slew_rate, flo
       }
     }
 
-    voltage = absRotate.calc(target, currPos, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL, slew_rate, toggle_slew);
+    voltage = absRotate.calc(target, currPos, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL);
 
     chas_move(voltage, -voltage);
 

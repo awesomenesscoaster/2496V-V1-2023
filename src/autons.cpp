@@ -18,12 +18,12 @@ void rightSideQual(){
     pros::delay(200);
     wings.set_value(false);
     pros::delay(200);
-    absTurn(-37,1500);
+    relTurn(-37,1500);
     moveTest(-1200, 1000);
     pros::delay(200);
     moveTest(1500, 1000);
     pros::delay(200);
-    absTurn(20, 1000);
+    relTurn(20, 1000);
     pros::delay(200);
     moveTest(200, 800);
     pros::delay(200);
@@ -35,7 +35,7 @@ void leftSideQual(){
     pros::delay(200);
     moveTest(400, 1000);
     pros::delay(200);
-    absTurn(175, 1000);
+    relTurn(175, 1000);
     wings.set_value(true);
     pros::delay(200);
     moveTest(-1000, 1000);
@@ -43,7 +43,7 @@ void leftSideQual(){
     pros::delay(200);
     moveTest(-200, 500);
     pros::delay(400);
-    absTurn(-45, 1000);
+    relTurn(-45, 1000);
     // pros::delay(400);
     // moveTest(-2000, 1000);
     
@@ -51,7 +51,7 @@ void leftSideQual(){
 }
 
 void rightSideElims(){
-
+    moveTest(2000, 2000);
 }
 
 void leftSideElims(){
@@ -71,19 +71,19 @@ void skills(){
     pros::delay(300);
     moveTest(-950, 1000);
     pros::delay(200);
-    absTurn(-5, 1000);
+    relTurn(-5, 1000);
     pros::delay(200);
     moveTest(-4000, 2000);
     pros::delay(200);
-    absTurn(-90, 1000);
+    relTurn(-90, 1000);
     pros::delay(200);
     moveTest(-1200, 1000);
     pros::delay(200);
-    absTurn(-90, 1000);
+    relTurn(-90, 1000);
     pros::delay(200);
     moveTest(-2000, 1000);
     pros::delay(200);
-    absTurn(90, 1000);
+    relTurn(90, 1000);
     moveTest(-4000, 2000);
 
 
