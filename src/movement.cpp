@@ -61,32 +61,64 @@ void timedMove(int speed, int time) {
   chas_move(0, 0);
 }
 
-void moveTo(float power, float target) {
-  lf.tare_position();
-  float kP = 0;
-  float kI = 0;
-  float kD = 0;
-  float prevError = 0;
-  int x = 0;
-  float error = 0;
-  while (true) {
-    prevError = error;
-    error = target - lf.get_position();
-    float integral = integral + error;
-    if (error < 1) {
-      integral = 0;
-    } else if (error > 300) {
-      integral = 0;
-    }
-    float derivative = prevError - error;
-    move1(kP * error + kI * integral + kD * derivative);
-    if (error < 1) {
-      x++;
-    } else if (x > 5) {
-      break;
-    }
-  }
-}
+// void moveTo(float target, int timeOut) {
+//   resetEncoders();
+//   float derivative;
+//   float integral;
+//   float position;
+//   float speed;
+//   float kP = 1.9;
+//   float kI = 0.035;
+//   float kD = 10;
+//   float kJ = 6.5;
+//   float prevError = 0;
+//   int x = 0;
+//   float error = 0;
+//   imu.tare_heading();
+//   float initial = imu.get_heading();
+//   float heading;
+//   float headingError;
+
+//   Timer t1;
+
+//   while (true) {
+//     heading = imu.get_heading();
+//     headingError = heading - initial;
+//     if (heading - initial > 180) {
+//       headingError = heading - initial - 360;
+//     }
+//     else {
+//       headingError = heading - initial;
+//     }
+//     position = (lf.get_position()+rf.get_position())/2;
+//     prevError = error;
+//     error = target - position;
+//     integral = integral + error;
+    
+//     if (fabs(error) < 1) {
+//       integral = 0;
+//     } else if (integral > 50) {
+//       integral = 50;
+//     }
+    
+//     derivative = error - prevError;
+//     speed = kP*error + kI*integral + kD*derivative;
+    
+//     chas_move(speed - kJ*headingError, speed + kJ*headingError);
+//     if (error < 1) {
+//       x++;
+//     } 
+//     else if (x > 30) {
+//       break;
+//     }
+
+//     if (t1.time() > timeOut){
+//       break;
+//     }
+
+//     pros::delay(10);
+//   }
+// }
 
 void moveTest(float target, float timeOut, float power_cap) {
   float encoder_average;
@@ -235,4 +267,72 @@ void relTurn(float target, float timeOut, float power_cap) {
     pros::delay(10);
   }
   chas_move(0, 0);
+}
+
+float heading_init;
+void absTurn(float abstarget, int timeOut){
+
+    Timer t1;
+    float voltage;
+    float position;
+    float turnKP;
+    float turnKI;
+    float turnKD;
+    int count = 0;
+ 
+    int printTimer = 0;
+    float printPos = 0;
+    controller.clear();
+
+    if (std::abs(abstarget) <= 30) {
+      turnKP = 1.87;
+      turnKI = 0.027;
+      turnKD = 1.5;
+    } else if (std::abs(abstarget-imu.get_rotation()) <= 45) {
+      turnKP = 1.8;   // 1.1
+      turnKI = 0.065; // 0.015
+      turnKD = 1.42;  // 1.3
+    } else if (std::abs(abstarget-imu.get_rotation()) <= 90) {
+      turnKP = 1.2;   //// 1.05
+      turnKI = 0.005; // 0.035
+      turnKD = 1.6;   // 1.35
+    } else if (std::abs(abstarget) <= 135) {
+      turnKP = 1.1;
+      turnKI = 0.005;
+      turnKD = 1.9;
+    } else if (std::abs(abstarget-imu.get_rotation()) <= 180) {
+      turnKP = 1;
+      turnKI = 0.02;
+      turnKD = 1.95;
+    }
+    
+    PID absRotate(turnKP, turnKI, turnKD);
+    absRotate.resetVars();
+
+    while(true){
+
+        position = fmod(imu.get_rotation() - heading_init, 360); 
+        voltage = absRotate.calc(abstarget, position, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL);
+        chas_move(voltage, -voltage);
+
+        if (!(printTimer % 5)) {
+            controller.print(0,0, "%f", position);
+        }
+        printTimer += 1;
+        if (std::abs(abstarget - position) <= 0.75){
+          count++;
+        }
+
+        if (count >= 10){
+        break;
+        }
+
+        if (t1.time() > timeOut){
+        break;
+        }
+
+        pros::delay(10);
+    }
+    chas_move(0,0);
+    printf("count: %d\r\n", (count));
 }

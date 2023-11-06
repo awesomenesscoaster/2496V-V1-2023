@@ -23,8 +23,8 @@ void driver(){
 
 	int printTimer = 0;
 	if(!(printTimer % 5)){
-		controller.print(0,0,"%f", leftMotorTemp);
-		controller.print(2,0,"%f", rightMotorTemp);
+		// controller.print(0,0,"%f", leftMotorTemp);
+		// controller.print(2,0,"%f", rightMotorTemp);
 	}
 	printTimer += 1;
 
@@ -87,7 +87,13 @@ void driver(){
 
 	}
 
-	if(controller.get_digital_new_press(DIGITAL_LEFT)){
-		moveTest(2000, 4000);
-	}
+	// if(controller.get_digital_new_press(DIGITAL_LEFT)){
+	// 	absTurn(90, 1000);
+	// }
+	// if(controller.get_digital_new_press(DIGITAL_RIGHT)){
+	// 	absTurn(45, 1000);
+	// }
+	// if(controller.get_digital_new_press(DIGITAL_UP)){
+	// 	absTurn(180, 1000);
+	// }
 }

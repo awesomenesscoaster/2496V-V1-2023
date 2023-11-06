@@ -12,7 +12,7 @@
 void rightSideQual(){
     wings.set_value(true);
     intake.move(-127);
-    pros::delay(200);
+    pros::delay(400);
     intake.move(0);
     moveTest(-1250,1000);
     pros::delay(200);
@@ -21,7 +21,7 @@ void rightSideQual(){
     relTurn(-37,1500);
     moveTest(-1200, 1000);
     pros::delay(200);
-    moveTest(1500, 1000);
+    moveTest(750, 1000);
     pros::delay(200);
     relTurn(20, 1000);
     pros::delay(200);

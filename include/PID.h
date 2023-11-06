@@ -1,8 +1,12 @@
 #include "main.h"
 
-#define STRAIGHT_KP 0.5   // 0.5
-#define STRAIGHT_KI 0.036 // 0.03
-#define STRAIGHT_KD 5.2   // 5.2
+#define STRAIGHT_KP 1.5   // 0.5
+#define STRAIGHT_KI 0.0825  // 0.034
+#define STRAIGHT_KD 6  // 5.2
+
+#define ABSTURN_KP 2
+#define ABSTURN_KI 0 
+#define ABSTURN_KD 0
 
 #define STRAIGHT_INTEGRAL_KICK 50
 #define STRAIGHT_MAX_INTEGRAL 200

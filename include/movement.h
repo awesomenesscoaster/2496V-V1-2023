@@ -22,4 +22,8 @@ void turnTo(float power, float target);
 void moveTest(float target, float timeOut, float power_cap = 127);
 
 void relTurn(float target, float timeOut, float power_cap = 127);
+
+void moveTo(float target, int timeOut);
+
+void absTurn(float target, int timeOut);
 #endif
