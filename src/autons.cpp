@@ -10,6 +10,15 @@
 #include <iostream>
 
 void rightSideQual(){
+    absTurn(-45, 1000);
+    // intake.move(127);
+    // moveTest(1500, 1500);
+    // intake.move(0);
+    // moveTest(-1300,1000);
+    // absTurn(-45, 1000);
+
+}
+void oldrightSideQual(){
     wings.set_value(true);
     intake.move(-127);
     pros::delay(400);

@@ -141,7 +141,7 @@ void moveTest(float target, float timeOut, float power_cap) {
     encoder_average = (lb.get_position() + rb.get_position()) / 2;
 
     heading = imuInit - imu.get_rotation();
-    heading = heading;
+    heading = heading*5;
 
     currPos = target - encoder_average;
     if (!(printTimer % 5)) {
@@ -170,16 +170,6 @@ void moveTest(float target, float timeOut, float power_cap) {
     pros::delay(10);
   }
   chas_move(0, 0);
-}
-
-void absTurn(float target,  float timeOut){
-  float voltage;
-  float turnKi;
-  float turnKD;
-  float turnKP;
-  float heading;
-  int printTimer = 0;
-  int count = 0;
 }
 
 void relTurn(float target, float timeOut, float power_cap) {
@@ -222,8 +212,6 @@ void relTurn(float target, float timeOut, float power_cap) {
 
   Timer t1;
   while (true) {
-    // currPos = fmod(imu.get_heading() - heading, 360);
-
     if (target > 175) {
       if (imu.get_heading() > 300) {
         currPos = imu.get_heading() - 360;
@@ -284,7 +272,7 @@ void absTurn(float abstarget, int timeOut){
     float printPos = 0;
     controller.clear();
 
-    if (std::abs(abstarget) <= 30) {
+    if (std::abs(abstarget-imu.get_rotation()) <= 30) {
       turnKP = 1.87;
       turnKI = 0.027;
       turnKD = 1.5;
@@ -296,7 +284,7 @@ void absTurn(float abstarget, int timeOut){
       turnKP = 1.2;   //// 1.05
       turnKI = 0.005; // 0.035
       turnKD = 1.6;   // 1.35
-    } else if (std::abs(abstarget) <= 135) {
+    } else if (std::abs(abstarget-imu.get_rotation()) <= 135) {
       turnKP = 1.1;
       turnKI = 0.005;
       turnKD = 1.9;
@@ -308,31 +296,45 @@ void absTurn(float abstarget, int timeOut){
     
     PID absRotate(turnKP, turnKI, turnKD);
     absRotate.resetVars();
+    float turn_start_pos = imu.get_heading();
 
-    while(true){
+  while(true){
+      
+    position = fmod(imu.get_rotation() - heading_init, 360);
 
-        position = fmod(imu.get_rotation() - heading_init, 360); 
-        voltage = absRotate.calc(abstarget, position, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL);
-        chas_move(voltage, -voltage);
+    voltage = absRotate.calc(abstarget, position, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL);
+    // chas_move(voltage, -voltage);
 
-        if (!(printTimer % 5)) {
-            controller.print(0,0, "%f", position);
-        }
-        printTimer += 1;
-        if (std::abs(abstarget - position) <= 0.75){
-          count++;
-        }
-
-        if (count >= 10){
-        break;
-        }
-
-        if (t1.time() > timeOut){
-        break;
-        }
-
-        pros::delay(10);
+    if((abstarget < 0) && (turn_start_pos >= 0)){
+      if(std::abs(abstarget-turn_start_pos)>180){
+        chas_move(-voltage,voltage);
+      }
     }
-    chas_move(0,0);
-    printf("count: %d\r\n", (count));
+    else if((abstarget < 0) && (turn_start_pos < 0)){
+      chas_move(-voltage,voltage);
+    }
+    else{
+      chas_move(voltage,-voltage);
+    }
+
+    if (!(printTimer % 5)) {
+      controller.print(0,0, "%f", position);
+    }
+    printTimer += 1;
+    if (std::abs(abstarget - position) <= 0.75){
+      count++;
+    }
+
+    if (count >= 10){
+      break;
+    }
+
+    if (t1.time() > timeOut){
+      break;
+    }
+
+    pros::delay(10);
+  }
+  chas_move(0,0);
+  printf("count: %d\r\n", (count));
 }
