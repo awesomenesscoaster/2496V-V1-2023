@@ -24,6 +24,24 @@ void chas_move(float left_power, float right_power) {
   rb.move(right_power);
 }
 
+void arcTurnRight(float left_power, float right_power, int time){
+  lf.move(left_power);
+  lm.move(left_power);
+  lb.move(left_power);
+  rf.move(right_power);
+  rm.move(right_power);
+  rb.move(right_power);
+  wings.set_value(true);
+  pros::delay(time);
+  lf.move(0);
+  lm.move(0);
+  lb.move(0);
+  rf.move(0);
+  rm.move(0);
+  rb.move(0);
+}
+
+
 void left(float power) {
   lf.move(power);
   lm.move(power);
@@ -128,6 +146,7 @@ void moveTest(float target, float timeOut, float power_cap) {
   float imuInit;
   float heading;
   int count = 0;
+
 
   PID straight(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
 
@@ -282,7 +301,7 @@ void absTurn(float abstarget, int timeOut){
       turnKD = 1.42;  // 1.3
     } else if (std::abs(abstarget-imu.get_rotation()) <= 90) {
       turnKP = 1.2;   //// 1.05
-      turnKI = 0.005; // 0.035
+      turnKI = 0.007; // 0.035
       turnKD = 1.6;   // 1.35
     } else if (std::abs(abstarget-imu.get_rotation()) <= 135) {
       turnKP = 1.1;
@@ -290,7 +309,7 @@ void absTurn(float abstarget, int timeOut){
       turnKD = 1.9;
     } else if (std::abs(abstarget-imu.get_rotation()) <= 180) {
       turnKP = 1;
-      turnKI = 0.02;
+      turnKI = 0.03;
       turnKD = 1.95;
     }
     
@@ -303,19 +322,19 @@ void absTurn(float abstarget, int timeOut){
     position = fmod(imu.get_rotation() - heading_init, 360);
 
     voltage = absRotate.calc(abstarget, position, TURN_INTEGRAL_KICK, TURN_MAX_INTEGRAL);
-    // chas_move(voltage, -voltage);
+    chas_move(voltage, -voltage);
 
-    if((abstarget < 0) && (turn_start_pos >= 0)){
-      if(std::abs(abstarget-turn_start_pos)>180){
-        chas_move(-voltage,voltage);
-      }
-    }
-    else if((abstarget < 0) && (turn_start_pos < 0)){
-      chas_move(-voltage,voltage);
-    }
-    else{
-      chas_move(voltage,-voltage);
-    }
+    // if((abstarget < 0) && (turn_start_pos >= 0)){
+    //   if(std::abs(abstarget-turn_start_pos)>180){
+    //     chas_move(-voltage,voltage);
+    //   }
+    // }
+    // else if((abstarget < 0) && (turn_start_pos < 0)){
+    //   chas_move(-voltage,voltage);
+    // }
+    // else{
+    //   chas_move(voltage,-voltage);
+    // }
 
     if (!(printTimer % 5)) {
       controller.print(0,0, "%f", position);

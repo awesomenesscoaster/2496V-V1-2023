@@ -26,4 +26,6 @@ void relTurn(float target, float timeOut, float power_cap = 127);
 void moveTo(float target, int timeOut);
 
 void absTurn(float target, int timeOut);
+
+void arcTurnRight(float left_power, float right_power, int time);
 #endif

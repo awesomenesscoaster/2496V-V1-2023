@@ -88,12 +88,12 @@ void driver(){
 	}
 
 	// if(controller.get_digital_new_press(DIGITAL_LEFT)){
-	// 	absTurn(90, 1000);
+	// 	skills();
 	// }
 	// if(controller.get_digital_new_press(DIGITAL_RIGHT)){
-	// 	absTurn(45, 1000);
+	// 	absTurn(-90, 1000);
 	// }
 	// if(controller.get_digital_new_press(DIGITAL_UP)){
-	// 	absTurn(180, 1000);
+	// 	absTurn(0, 1000);
 	// }
 }
