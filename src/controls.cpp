@@ -88,7 +88,7 @@ void driver(){
 	}
 
 	// if(controller.get_digital_new_press(DIGITAL_LEFT)){
-	// 	skills();
+	// 	leftSideQual();
 	// }
 	// if(controller.get_digital_new_press(DIGITAL_RIGHT)){
 	// 	absTurn(-90, 1000);
