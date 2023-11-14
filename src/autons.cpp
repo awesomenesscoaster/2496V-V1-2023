@@ -123,18 +123,30 @@ void leftSideQual(){
 
 void leftSideElims(){
     intake.move(127);
-    pros::delay(500);
-    moveTest(-1000,750);
+    moveTest(-2000, 750);
+    pros::delay(100);
     intake.move(0);
-    absTurn(45, 750);
-    moveTest(-1750, 850);
     wings.set_value(true);
-    absTurn(-50, 750);
-    moveTest(-800, 750);
-    moveTest(400, 750);
     absTurn(90, 750);
+    moveTest(-2000, 750);
+    pros::delay(200);
+    wings.set_value(false);
     intake.move(-127);
-    moveTest(1200, 750);
+    moveTest(1700, 750);
+    intake.move(0);
+    moveTest(-200, 750);
+    // pros::delay(500);
+    // moveTest(-1000,750);
+    // intake.move(0);
+    // absTurn(45, 750);
+    // moveTest(-1750, 850);
+    // wings.set_value(true);
+    // absTurn(-50, 750);
+    // moveTest(-800, 750);
+    // moveTest(400, 750);
+    // absTurn(90, 750);
+    // intake.move(-127);
+    // moveTest(1200, 750);
 
 
 }
