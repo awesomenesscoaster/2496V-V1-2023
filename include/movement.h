@@ -28,4 +28,7 @@ void moveTo(float target, int timeOut);
 void absTurn(float target, int timeOut);
 
 void arcTurnRight(float left_power, float right_power, int time);
+
+void skillsMove(float target, float timeOut, float power_cap =  127);
+
 #endif

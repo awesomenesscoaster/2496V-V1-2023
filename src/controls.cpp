@@ -54,7 +54,7 @@ void driver(){
 	chas_move(lPwr, rPwr);
 	// Cata Control
 	if(controller.get_digital_new_press(DIGITAL_R1)) {
-		catapult::fire();
+		catapult::id();
 	}
 	if (controller.get_digital_new_press(DIGITAL_R2)) {
 		catapult::half();

@@ -14,7 +14,8 @@ namespace catapult{
     extern cataStates state;
     extern Timer t1;
     extern void run();
-    extern void fire();
+    // extern void fire();
+    extern void id();
     extern void half();
     extern void matchload();
 };

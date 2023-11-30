@@ -191,6 +191,59 @@ void moveTest(float target, float timeOut, float power_cap) {
   chas_move(0, 0);
 }
 
+void skillsMove(float target, float timeOut, float power_cap) {
+  float encoder_average;
+  float voltage;
+  float currPos = 0;
+  int printTimer = 0;
+  float imuInit;
+  float heading;
+  int count = 0;
+
+
+  PID straight(STRAIGHT_KP, STRAIGHT_KI, STRAIGHT_KD);
+
+  resetEncoders();
+  controller.clear();
+  straight.resetVars();
+  // imuInit = imu.tare_rotation();
+
+  Timer t1;
+  while (true) {
+    encoder_average = (lb.get_position() + rb.get_position()) / 2;
+
+    heading = imuInit - imu.get_rotation();
+    heading = heading*5;
+
+    currPos = target - encoder_average;
+    if (!(printTimer % 5)) {
+      controller.print(0, 0, "%f", currPos);
+    }
+    printTimer += 1;
+
+    voltage = straight.calc(target, encoder_average, STRAIGHT_INTEGRAL_KICK, STRAIGHT_MAX_INTEGRAL);
+
+    if (std::abs(voltage) > power_cap) {
+      voltage = power_cap * voltage / std::abs(voltage);
+    }
+
+    chas_move(voltage + heading, voltage - heading);
+
+    if(t1.time() > timeOut){
+      break;
+    }
+
+    if (std::abs(target - encoder_average) <= 0.8) {
+      count++;
+    }
+    if (count >= 10) {
+      break;
+    }
+    pros::delay(10);
+  }
+  chas_move(0, 0);
+}
+
 void relTurn(float target, float timeOut, float power_cap) {
   float voltage;
   float turnKI;

@@ -8,21 +8,21 @@ namespace catapult {
     void run() {
             switch (state)
                 {
-                case firing:
-                    cata.move(-127);
-                    if (!cataSwitch.get_value()) {
-                        state = reloading;
-                    }
-                    break;
-                case reloading:
-                    cata.move(-127);
-                    if (cataSwitch.get_value()) {
-                        cata.move(0);
-                        state = idle;
-                    }
-                    break;
+                // case firing:
+                //     cata.move(-127);
+                //     if (!cataSwitch.get_value()) {
+                //         state = reloading;
+                //     }
+                //     break;
+                // case reloading:
+                //     cata.move(-127);
+                //     if (cataSwitch.get_value()) {
+                //         cata.move(0);
+                //         state = idle;
+                //     }
+                    // break;
                 case halfState:
-                    if(t1.time() < 700) {
+                    if(t1.time() < 725) {
                         cata.move(-127);
                     }
                     else {
@@ -33,6 +33,7 @@ namespace catapult {
                 case matchloading:
                     cata.move(-110);
                     break;
+                    
                 case idle:
                     break;
             }
@@ -48,6 +49,11 @@ namespace catapult {
 
     void matchload() {
         state = matchloading;
+    }
+
+    void id(){
+        state = idle;
+        cata.move(0);
     }
 
 }
