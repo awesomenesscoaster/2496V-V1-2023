@@ -206,7 +206,7 @@ void skillsMove(float target, float timeOut, float power_cap) {
   resetEncoders();
   controller.clear();
   straight.resetVars();
-  // imuInit = imu.tare_rotation();
+  imuInit = imu.get_rotation();
 
   Timer t1;
   while (true) {

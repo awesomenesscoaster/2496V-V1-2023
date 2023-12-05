@@ -159,28 +159,26 @@ void skills(){
     pros::delay(1000);
 
     cata.move(-110);
-    pros::delay(45000);
+    pros::delay(60000);
     cata.move(0);
 
-    right(127);
-    pros::delay(100);
-    right(0);
+    absTurn(45, 500);
 
-    moveTest(-1500, 1000);
-    wings.set_value(true);
-    moveTest(-3000, 1000);
-    moveTest(1000, 750);
-    wings.set_value(false);
-    moveTest(-5000, 1000);
-    wings.set_value(true);
-    moveTest(-5000, 1000);
+    skillsMove(-620, 700);
+    absTurn(0, 500);
 
+    skillsMove(-4500, 2000);
 
+    absTurn(-45, 700);
+    skillsMove(-1700, 750);
+    absTurn(-90, 700);
+    skillsMove(-1000, 700);
+    absTurn(-90, 300);
+    skillsMove(500, 500);
+    skillsMove(-800, 500);
 
-    // pros::delay(200);
-
-    // moveTest(-5000, 1500);
-
-
+    skillsMove(500, 700);
+    absTurn(90, 750);
+    skillsMove(-3000, 1000);
 
 }
