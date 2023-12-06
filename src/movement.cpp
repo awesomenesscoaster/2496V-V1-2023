@@ -213,7 +213,7 @@ void skillsMove(float target, float timeOut, float power_cap) {
     encoder_average = (lb.get_position() + rb.get_position()) / 2;
 
     heading = imuInit - imu.get_rotation();
-    heading = heading*5;
+    heading = heading*7;
 
     currPos = target - encoder_average;
     if (!(printTimer % 5)) {
@@ -391,6 +391,7 @@ void absTurn(float abstarget, int timeOut){
 
     if (!(printTimer % 5)) {
       controller.print(0,0, "%f", position);
+      controller.print(1,0, "%f", abstarget);
     }
     printTimer += 1;
     if (std::abs(abstarget - position) <= 0.75){
