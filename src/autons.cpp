@@ -154,7 +154,9 @@ void skills() {
   pros::delay(35000);
   cata.move(0);
 
-  absTurn(45, 500);
+  pros::delay(1000);
+
+  absTurn(45, 700);
 
   skillsMove(-750, 700);
   absTurn(0, 500);
@@ -162,7 +164,7 @@ void skills() {
   skillsMove(-4450, 2000);
 
   absTurn(-90, 750);
-  skillsMove(-1200, 700);
+  skillsMove(-1300, 700);
   absTurn(-180, 700);
   skillsMove(-1400, 700);
 
@@ -184,7 +186,4 @@ void skills() {
   absTurn(45, 400);
   wings.set_value(true);
   skillsMove(-2000, 700);
-
-  
-
 }
