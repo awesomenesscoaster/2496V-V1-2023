@@ -151,39 +151,43 @@ void skills() {
   pros::delay(1000);
 
   cata.move(-110);
-  pros::delay(35000);
+  pros::delay(34400);
   cata.move(0);
 
   pros::delay(1000);
 
-  absTurn(45, 700);
+  absTurn(45, 1000);
 
-  skillsMove(-750, 700);
-  absTurn(0, 500);
+  skillsMove(-1200, 900);
+  absTurn(0, 1000);
 
   skillsMove(-4450, 2000);
+  intake.move(127);
 
-  absTurn(-90, 750);
-  skillsMove(-1300, 700);
-  absTurn(-180, 700);
+  absTurn(-90, 1000);
+  skillsMove(-1400, 700);
+  absTurn(-180, 1000);
   skillsMove(-1400, 700);
 
-  absTurn(-90, 700);
+  absTurn(-90, 1000);
   skillsMove(-2100, 1000);
-  absTurn(0, 700);
+  absTurn(0, 1000);
   wings.set_value(true);
 
-  skillsMove(-2000, 750);
+  skillsMove(-2400, 850);
   skillsMove(1750, 750);
   wings.set_value(false);
-  absTurn(90, 700);
+  absTurn(90, 1000);
   skillsMove(-800, 700);
-  absTurn(0, 700);
+  absTurn(0, 1000);
   wings.set_value(true);
   skillsMove(-2000, 750);
 
   skillsMove(1500, 500);
-  absTurn(45, 400);
+  absTurn(60, 1000);
   wings.set_value(true);
-  skillsMove(-2000, 700);
+  skillsMove(-1000, 700);
+  wings.set_value(false);
+  skillsMove(-1000, 700);
+
 }

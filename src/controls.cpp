@@ -90,6 +90,13 @@ void driver(){
 	if(controller.get_digital_new_press(DIGITAL_LEFT)){
 		skills();
 	}
+
+	if(controller.get_digital_new_press(DIGITAL_RIGHT)){
+		right(127);
+  		pros::delay(200);
+  		right(0);
+	}
+
 	// if(controller.get_digital_new_press(DIGITAL_RIGHT)){
 	// 	absTurn(-90, 1000);
 	// }
