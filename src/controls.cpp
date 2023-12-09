@@ -59,6 +59,12 @@ void driver(){
 	if (controller.get_digital_new_press(DIGITAL_R2)) {
 		catapult::half();
 	}
+	if (controller.get_digital_new_press(DIGITAL_RIGHT)){
+		right(127);
+  		pros::delay(200);
+  		right(0);
+		catapult::matchload();
+	}
 	if(controller.get_digital_new_press(DIGITAL_B)) {
 		catapult::matchload();
 	}
@@ -88,13 +94,7 @@ void driver(){
 	}
 
 	if(controller.get_digital_new_press(DIGITAL_LEFT)){
-		skills();
-	}
-
-	if(controller.get_digital_new_press(DIGITAL_RIGHT)){
-		right(127);
-  		pros::delay(200);
-  		right(0);
+		rightSideElims();
 	}
 
 	// if(controller.get_digital_new_press(DIGITAL_RIGHT)){

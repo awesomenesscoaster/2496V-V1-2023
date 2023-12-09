@@ -9,6 +9,30 @@
 #include <iostream>
 #include <valarray>
 
+void rightSideQual2(){
+  intake.move(127);
+  pros::delay(400);
+  skillsMove(1800, 1100);
+  intake.move(0);
+  skillsMove(-1300, 750);
+  absTurn(-55, 750);
+  skillsMove(-2000, 750);
+  absTurn(-115, 750);
+  skillsMove(-1000, 750);
+  skillsMove(700, 1000);
+  absTurn(-90, 1000);
+  intake.move(-127);
+  skillsMove(800, 1000);
+  skillsMove(-700, 750);
+  absTurn(135, 750);
+  intake.move(0);
+  skillsMove(-1500, 1000);
+  absTurn(0, 750);
+  skillsMove(-2000, 750);
+
+
+}
+
 void rightSideQual() {
   intake.move(127);
   pros::delay(400);
@@ -19,7 +43,7 @@ void rightSideQual() {
   moveTest(-2000, 750);
   absTurn(-60, 750);
   moveTest(-1000, 750);
-  moveTest(700, 1000);
+  moveTest(600, 1000);
 
   absTurn(180, 1000);
 
@@ -28,7 +52,7 @@ void rightSideQual() {
   moveTest(-700, 750);
   absTurn(45, 750);
   intake.move(0);
-  moveTest(-1300, 1000);
+  moveTest(-1500, 1000);
   absTurn(45, 750);
   blocker.set_value(true);
   moveTest(-1800, 1000);
@@ -44,6 +68,7 @@ void rightSideElims() {
   absTurn(-60, 750);
   moveTest(-1200, 750);
   moveTest(600, 750);
+  
 
   absTurn(180, 750);
 
@@ -102,7 +127,7 @@ void leftSideQual() {
   blocker.set_value(true);
   moveTest(-2500, 750);
   absTurn(60, 750);
-  moveTest(-500, 750);
+  moveTest(-750, 750);
 
   //    intake.move(127);
   //    moveTest(-2400, 1000);
