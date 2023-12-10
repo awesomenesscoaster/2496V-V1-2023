@@ -3,9 +3,10 @@
 
 void oldrightSideQual();
 void rightSideElims();
-void leftSideElims();
+void leftSideElimsLoad();
 void leftSideQual();
 void rightSideQual();
 void skills();
 void rightSideQual2();
+void leftSideElims();
 #endif

@@ -36,7 +36,7 @@ void rightSideQual2(){
 void rightSideQual() {
   intake.move(127);
   pros::delay(400);
-  moveTest(1800, 1100);
+  moveTest(1700, 1100);
   intake.move(0);
   moveTest(-1300, 750);
   absTurn(-55, 750);
@@ -55,7 +55,7 @@ void rightSideQual() {
   moveTest(-1500, 1000);
   absTurn(45, 750);
   blocker.set_value(true);
-  moveTest(-1800, 1000);
+  moveTest(-1850, 1000);
 }
 
 void rightSideElims() {
@@ -123,11 +123,15 @@ void leftSideQual() {
   wings.set_value(false);
   moveTest(-2400, 1000);
   moveTest(500, 750);
-  absTurn(90, 750);
+  absTurn(100, 850);
   blocker.set_value(true);
   moveTest(-2500, 750);
-  absTurn(60, 750);
-  moveTest(-750, 750);
+  absTurn(65, 750);
+  moveTest(-950, 750);
+  // chas_move(-25, -25);
+  // pros::delay(1000);
+  // chas_move(0,0);
+  
 
   //    intake.move(127);
   //    moveTest(-2400, 1000);
@@ -140,20 +144,25 @@ void leftSideQual() {
   //    absTurn(-45, 750);
 }
 
-void leftSideElims() {
+void leftSideElimsLoad() {
   intake.move(127);
-  moveTest(-2000, 750);
+  pros::delay(200);
+  moveTest(-2900, 1200);
   pros::delay(100);
   intake.move(0);
   wings.set_value(true);
-  absTurn(90, 750);
+  absTurn(75, 750);
   moveTest(-2000, 750);
   pros::delay(200);
   wings.set_value(false);
   intake.move(-127);
-  moveTest(1700, 750);
+  moveTest(1800, 750);
   intake.move(0);
-  moveTest(-200, 750);
+  moveTest(-500, 750);
+  absTurn(-90, 750);
+  moveTest(1500, 1000);
+  absTurn(35, 750);
+  moveTest(1200, 750);
   // pros::delay(500);
   // moveTest(-1000,750);
   // intake.move(0);
@@ -168,15 +177,35 @@ void leftSideElims() {
   // moveTest(1200, 750);
 }
 
+void leftSideElims() {
+  intake.move(127);
+  pros::delay(400);
+  moveTest(-2500, 1200);
+  pros::delay(100);
+  intake.move(0);
+  wings.set_value(true);
+  absTurn(75, 750);
+  moveTest(-2000, 750);
+  pros::delay(200);
+  wings.set_value(false);
+  intake.move(-127);
+  moveTest(1800, 750);
+  intake.move(0);
+  moveTest(-500, 750);
+}
+
 void skills() {
   // Shooting Position
   right(127);
   pros::delay(200);
   right(0);
-  pros::delay(1000);
+  pros::delay(200);
 
-  cata.move(-110);
-  pros::delay(34400);
+  skillsMove(300, 500);
+  pros::delay(600);
+
+  cata.move(-127);
+  pros::delay(30000);
   cata.move(0);
 
   pros::delay(1000);

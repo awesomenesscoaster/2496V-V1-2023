@@ -31,7 +31,6 @@ void arcTurnRight(float left_power, float right_power, int time){
   rf.move(right_power);
   rm.move(right_power);
   rb.move(right_power);
-  wings.set_value(true);
   pros::delay(time);
   lf.move(0);
   lm.move(0);

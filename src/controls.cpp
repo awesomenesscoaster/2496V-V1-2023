@@ -56,16 +56,13 @@ void driver(){
 	if(controller.get_digital_new_press(DIGITAL_R1)) {
 		catapult::id();
 	}
-	if (controller.get_digital_new_press(DIGITAL_R2)) {
-		catapult::half();
-	}
 	if (controller.get_digital_new_press(DIGITAL_RIGHT)){
 		right(127);
   		pros::delay(200);
   		right(0);
 		catapult::matchload();
 	}
-	if(controller.get_digital_new_press(DIGITAL_B)) {
+	if(controller.get_digital_new_press(DIGITAL_R2)) {
 		catapult::matchload();
 	}
 	catapult::run();
@@ -87,15 +84,15 @@ void driver(){
 		wingState = !wingState;
 	}
 	
-	if(controller.get_digital_new_press(DIGITAL_A)){
+	if(controller.get_digital_new_press(DIGITAL_B)){
 		blocker.set_value(!blockerState);
 		blockerState = !blockerState;
 
 	}
 
-	if(controller.get_digital_new_press(DIGITAL_LEFT)){
-		rightSideElims();
-	}
+	// if(controller.get_digital_new_press(DIGITAL_LEFT)){
+	// 	skills();
+	// }
 
 	// if(controller.get_digital_new_press(DIGITAL_RIGHT)){
 	// 	absTurn(-90, 1000);
